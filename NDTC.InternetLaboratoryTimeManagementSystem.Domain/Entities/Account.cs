@@ -31,8 +31,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
                 LastLoginAt = DateTime.UtcNow
             };
 
-            account.MarkAsLoggedIn();
-
             return account;
         }
 
