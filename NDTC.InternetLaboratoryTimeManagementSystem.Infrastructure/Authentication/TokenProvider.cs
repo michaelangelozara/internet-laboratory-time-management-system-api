@@ -1,5 +1,4 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
@@ -10,9 +9,8 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Options;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication
 {
-    internal sealed class TokenProvider(
-        IConfiguration configuration,
-        IOptions<JwtOptions> options) : ITokenProvider
+    internal sealed class TokenProvider(IOptions<JwtOptions> options) 
+        : ITokenProvider
     {
         public string Create(User user)
         {
@@ -28,10 +26,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authenticat
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                     //new Claim(JwtRegisteredClaimNames.Email, user.Email)
                 ]),
-                Expires = DateTime.UtcNow.AddMinutes(configuration.GetValue<int>("Jwt:ExpirationInMinutes")),
+                Expires = DateTime.UtcNow.AddMinutes(jwtOption.AccessTokenExpirationMinutes),
                 SigningCredentials = credentials,
-                Issuer = configuration["Jwt:Issuer"],
-                Audience = configuration["Jwt:Audience"]
+                Issuer = jwtOption.Issuer,
+                Audience = jwtOption.Audience
             };
 
             var handler = new JsonWebTokenHandler();

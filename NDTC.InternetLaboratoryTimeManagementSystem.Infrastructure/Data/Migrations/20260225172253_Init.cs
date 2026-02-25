@@ -212,8 +212,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
             migrationBuilder.CreateIndex(
                 name: "IX_user_roles_user_id_role_id",
                 table: "user_roles",
-                columns: new[] { "user_id", "role_id" },
-                unique: true);
+                columns: new[] { "user_id", "role_id" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_users_created_at",

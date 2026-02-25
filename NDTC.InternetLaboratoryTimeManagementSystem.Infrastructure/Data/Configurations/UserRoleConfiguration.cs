@@ -18,7 +18,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(ur => ur.RoleId)
                .HasColumnName("role_id");
 
-            builder.HasIndex(ur => new { ur.UserId, ur.RoleId }).IsUnique();
+            builder.HasIndex(ur => new { ur.UserId, ur.RoleId });
 
             builder.HasOne(ur => ur.User)
                 .WithMany(u => u.UserRoles)

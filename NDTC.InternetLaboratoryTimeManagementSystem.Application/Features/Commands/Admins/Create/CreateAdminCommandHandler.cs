@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
@@ -14,8 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
     internal class CreateAdminCommandHandler(
         IUserRepository userRepository,
         IUnitOfWork unitOfWork,
-        IRoleManager roleManager,
-        IUserRoleRepository userRoleRepository) 
+        IRoleManager roleManager) 
         : IRequestHandler<CreateAdminCommand, Result<Guid>>
     {
         public async Task<Result<Guid>> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
@@ -24,15 +21,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             {
                 await unitOfWork.BeginTransactionAsync(cancellationToken);
 
-                var adminRole = await roleManager.FindByNameAsync(Roles.Admin);
-                if(adminRole is null)
-                    return Result.Failure<Guid>(Error.NotFound("Role.NotFound", "Role not found."));
-
                 var user = User.Create(request.SchoolId, request.RFID);
                 await userRepository.AddAsync(user);
 
-                var userRole = UserRole.Create(user, adminRole);
-                await userRoleRepository.AddAsync(userRole);
+                await roleManager.AddToRoleAsync(user, Roles.Admin);
 
                 await unitOfWork.CommitAsync(cancellationToken);
 
