@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.Application/NDTC.InternetLaboratoryTimeManagementSystem.Application.csproj" />
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.Domain/NDTC.InternetLaboratoryTimeManagementSystem.Domain.csproj" />
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure/NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.csproj" />
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel/NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.csproj" />
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.WebAPI/NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="NDTC.InternetLaboratoryTimeManagementSystem.UnitTests/NDTC.InternetLaboratoryTimeManagementSystem.UnitTests.csproj" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+</Solution>

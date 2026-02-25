@@ -1,0 +1,29 @@
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
+using Microsoft.AspNetCore.Http;
+
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication
+{
+    internal sealed class UserContext : IUserContext
+    {
+        private sealed class UserContextUnavailableException : Exception
+        {
+            public UserContextUnavailableException() : base("User context is unavailable")
+            {
+            }
+        }
+
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public UserContext(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public Guid UserId =>
+            _httpContextAccessor
+                .HttpContext?
+                .User
+                .GetUserId() ??
+            throw new UserContextUnavailableException();
+    }
+}

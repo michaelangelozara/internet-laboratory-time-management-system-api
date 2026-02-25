@@ -1,0 +1,6 @@
+@NDTC.InternetLaboratoryTimeManagementSystem.WebAPI_HostAddress = http://localhost:5259
+
+GET {{NDTC.InternetLaboratoryTimeManagementSystem.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
