@@ -1,0 +1,9 @@
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
+
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts
+{
+    public interface IAccountRepository
+    {
+        Task<Account?> FindByRFIDWithUserAsync(string rfid);
+    }
+}

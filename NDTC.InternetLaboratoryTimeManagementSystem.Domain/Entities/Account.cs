@@ -9,6 +9,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public DateTime? LastLoginAt { get; private set; }
 
+        public TimeSpan RemainingDuration => (TotalDuration - (DateTime.UtcNow - LastLoginAt)) ?? TimeSpan.Zero;
+        
         public TimeSpan TotalDuration { get; private set; }
 
         public bool IsLoggedIn { get; private set; } = false;
@@ -25,7 +27,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             {
                 Id = Guid.NewGuid(),
                 RFID = rfid,
-                TotalDuration = TimeSpan.FromHours(2)
+                TotalDuration = TimeSpan.FromHours(2),
+                LastLoginAt = DateTime.UtcNow
             };
 
             account.MarkAsLoggedIn();
@@ -36,6 +39,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
         public void MarkAsLoggedIn()
         {
             LastLoginAt = DateTime.UtcNow;
+            IsLoggedIn = true;
+        }
+
+        public void LogOut()
+        {
+            IsLoggedIn = false;
         }
 
     }

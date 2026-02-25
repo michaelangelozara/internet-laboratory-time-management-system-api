@@ -81,6 +81,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
 
                     b.HasIndex("LastModifiedAt");
 
+                    b.HasIndex("SchoolId")
+                        .IsUnique();
+
                     b.ToTable("users", (string)null);
                 });
 

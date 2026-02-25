@@ -19,6 +19,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
                 .HasColumnName("school_id")
                 .HasMaxLength(50)
                 .IsRequired();
+
+            builder.HasIndex(u => u.SchoolId)
+                .IsUnique();
         }
     }
 }

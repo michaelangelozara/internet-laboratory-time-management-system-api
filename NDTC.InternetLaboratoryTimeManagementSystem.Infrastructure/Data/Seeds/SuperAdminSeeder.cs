@@ -21,7 +21,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
             var superAdmin = User.Create("superadmin", "superadmin");
             await context.Users.AddAsync(superAdmin, cancellationToken);
 
-            var userRole = UserRole.CreateUserRole(superAdmin, role);
+            var userRole = UserRole.Create(superAdmin, role);
             await context.UserRoles.AddAsync(userRole, cancellationToken);
 
             await context.SaveChangesAsync(cancellationToken);

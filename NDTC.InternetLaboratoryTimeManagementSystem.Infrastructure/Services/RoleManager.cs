@@ -2,7 +2,6 @@
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
 {
@@ -23,7 +22,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             var role = await roleRepository.FindByNameAsync(roleName)
                 ?? throw new InvalidOperationException("Invalid type of role.");
 
-            await userRoleRepository.AddAsync(UserRole.CreateUserRole(user, role));
+            await userRoleRepository.AddAsync(UserRole.Create(user, role));
         }
 
         public async Task<Role> CreateAsync(Role role)

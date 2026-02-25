@@ -12,7 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public Role? Role { get; set; }
 
-        public static UserRole CreateUserRole(User user, Role role)
+        public static UserRole Create(User user, Role role)
         {
             ArgumentNullException.ThrowIfNull(user);
             ArgumentNullException.ThrowIfNull(role);

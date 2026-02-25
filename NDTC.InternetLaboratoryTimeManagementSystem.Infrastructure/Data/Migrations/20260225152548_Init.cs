@@ -224,6 +224,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 name: "IX_users_last_modified_at",
                 table: "users",
                 column: "last_modified_at");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_users_school_id",
+                table: "users",
+                column: "school_id",
+                unique: true);
         }
 
         /// <inheritdoc />

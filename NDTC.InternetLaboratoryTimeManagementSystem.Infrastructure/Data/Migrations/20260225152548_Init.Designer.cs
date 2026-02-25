@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260225064811_Init")]
+    [Migration("20260225152548_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -83,6 +83,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.HasIndex("CreatedAt");
 
                     b.HasIndex("LastModifiedAt");
+
+                    b.HasIndex("SchoolId")
+                        .IsUnique();
 
                     b.ToTable("users", (string)null);
                 });

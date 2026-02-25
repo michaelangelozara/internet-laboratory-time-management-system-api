@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication;
@@ -49,6 +51,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IRoleClaimRepository, RoleClaimRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

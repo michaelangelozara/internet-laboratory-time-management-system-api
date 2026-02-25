@@ -5,15 +5,19 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
+using Microsoft.Extensions.Options;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Options;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication
 {
-    internal sealed class TokenProvider(IConfiguration configuration) : ITokenProvider
+    internal sealed class TokenProvider(
+        IConfiguration configuration,
+        IOptions<JwtOptions> options) : ITokenProvider
     {
         public string Create(User user)
         {
-            string secretKey = configuration["Jwt:Secret"]!;
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var jwtOption = options.Value;
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOption.SecretKey));
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
