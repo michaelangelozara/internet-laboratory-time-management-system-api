@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
 using Scalar.AspNetCore;
 
@@ -20,6 +21,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
             using var scope = app.Services.CreateAsyncScope();
             using var appDbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
             await appDbContext.Database.MigrateAsync();
+        }
+
+        internal static async Task UseLogoutAllAccounts(this WebApplication app)
+        {
+            using var scope = app.Services.CreateAsyncScope();
+            var accountRepository = scope.ServiceProvider.GetRequiredService<IAccountRepository>();
+            await accountRepository.SetIsLoggedInToFalse();
         }
     }
 }

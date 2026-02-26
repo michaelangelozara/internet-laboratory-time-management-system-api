@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
 {
     await app.UseMigration();
 
+    await app.UseLogoutAllAccounts();
+
     app.UseScalarUI();
 }
 

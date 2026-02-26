@@ -7,5 +7,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
         Task<Account?> FindByRFIDWithUserAsync(string rfid);
 
         Task<Account?> FindByUserIdAsync(Guid userId);
+
+        Task SetIsLoggedInToFalse();
     }
 }

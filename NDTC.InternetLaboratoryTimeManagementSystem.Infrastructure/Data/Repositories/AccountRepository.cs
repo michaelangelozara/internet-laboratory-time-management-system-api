@@ -23,5 +23,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             return await context.Accounts
                 .FirstOrDefaultAsync(a => a.UserId == userId);
         }
+
+        public async Task SetIsLoggedInToFalse()
+        {
+            await context.Accounts
+                .ExecuteUpdateAsync(setter => 
+                    setter.SetProperty(a => a.IsLoggedIn, false));
+        }
     }
 }
