@@ -18,6 +18,15 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(e => e.UserId)
                 .HasColumnName("user_id");
 
+            builder.Property(e => e.Question)
+                .HasColumnName("question")
+                .HasMaxLength(1000)
+                .IsRequired();
+
+            builder.Property(e => e.Active)
+                .HasColumnName("active")
+                .HasDefaultValue(true);
+
             builder.HasOne(e => e.User)
                 .WithMany(u => u.Evaluations)
                 .HasForeignKey(e => e.UserId)

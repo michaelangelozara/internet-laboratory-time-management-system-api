@@ -7,6 +7,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
     public sealed class Evaluation
         : Entity, IAuditable
     {
+        public string Question { get; private set; } = string.Empty;
+
+        public bool Active { get; private set; } = true;
+        
         public DateTime CreatedAt { get; } = DateTime.UtcNow;
 
         public DateTime? LastModifiedAt { get; private set; }
