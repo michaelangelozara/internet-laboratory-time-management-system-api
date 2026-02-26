@@ -60,6 +60,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEvaluationRepository, EvaluationRepository>();
+            services.AddScoped<IAnswerEvaluationRepository, AnswerEvaluationRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -1,4 +1,5 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Enums.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Abstractions.Configurations;
 
@@ -42,6 +43,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
         public void SetQuestion(string question)
         {
             Question = question;
+        }
+
+        public Result AddAnswerEvaluation(string comment, string evaluationType, Guid userId)
+        {
+            if (!Enum.TryParse<EvaluationType>(evaluationType, out var t))
+                return Result.Failure(Error.Validation("EvaluationType.Invalid", $"{evaluationType} cannot be parsed as AnswerEvaluation's type."));
+
+            var answerEvaluation = AnswerEvaluation.Create(comment, t, userId);
+            AnswerEvaluations.Add(answerEvaluation);
+            return Result.Success();
         }
     }
 }

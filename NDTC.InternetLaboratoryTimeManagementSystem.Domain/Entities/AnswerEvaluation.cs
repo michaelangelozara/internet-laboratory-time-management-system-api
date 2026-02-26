@@ -20,6 +20,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public Evaluation? Evaluation { get; private set; }
 
+        // answered by
         public Guid UserId { get; private set; }
 
         public User? User { get; private set; }
@@ -27,6 +28,19 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
         protected AnswerEvaluation()
         {
             
+        }
+
+        public static AnswerEvaluation Create(string comment, EvaluationType type, Guid userId)
+        {
+            var answerEvaluation = new AnswerEvaluation
+            {
+                Id = Guid.NewGuid(),
+                Comment = comment,
+                Type = type,
+                UserId = userId
+            };
+
+            return answerEvaluation;
         }
     }
 }
