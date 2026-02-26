@@ -15,6 +15,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
         public DateTime? LastModifiedAt { get; private set; }
 
+        // created by
         public Guid UserId { get; private set; }
 
         public User? User { get; private set; }
@@ -24,6 +25,18 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
         protected Evaluation()
         {
             
+        }
+
+        public static Evaluation Create(string question, Guid createBy)
+        {
+            var evaluation = new Evaluation
+            {
+                Id = Guid.NewGuid(),
+                Question = question,
+                UserId = createBy
+            };
+
+            return evaluation;
         }
     }
 }

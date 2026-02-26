@@ -8,6 +8,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authe
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication;
@@ -58,6 +59,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IEvaluationRepository, EvaluationRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

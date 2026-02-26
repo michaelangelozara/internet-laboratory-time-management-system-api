@@ -14,5 +14,12 @@
         {
             public const string UpdateRFID = "accounts:update_rfid";
         }
+
+        public static class Evaluation
+        {
+            public const string Create = "evaluations:create";
+            public const string Update = "evaluations:update";
+            public const string Delete = "evaluations:delete";
+        }
     }
 }
