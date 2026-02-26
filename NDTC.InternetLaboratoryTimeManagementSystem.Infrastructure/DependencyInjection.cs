@@ -42,6 +42,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
             services.AddScoped<IRoleManager, RoleManager>();
+            services.AddScoped<IAccountService, AccountService>();
 
             return services;
         }

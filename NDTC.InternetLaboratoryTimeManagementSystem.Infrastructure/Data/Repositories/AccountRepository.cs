@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
-    internal class AccountRepository(AppDbContext context)
+    internal class AccountRepository(
+        AppDbContext context,
+        IDateTimeProvider dateTimeProvider)
         : IAccountRepository
     {
         public async Task<Account?> FindByRFIDWithUserAsync(string rfid)
@@ -24,11 +27,15 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .FirstOrDefaultAsync(a => a.UserId == userId);
         }
 
-        public async Task SetIsLoggedInToFalse()
+        public async Task SetIsLoggedInToFalseAndReComputeAvailableDuration()
         {
             await context.Accounts
-                .ExecuteUpdateAsync(setter => 
-                    setter.SetProperty(a => a.IsLoggedIn, false));
+                .Where(a => a.IsLoggedIn)
+                .ExecuteUpdateAsync(setter =>
+                    setter
+                        .SetProperty(a => a.IsLoggedIn, false)
+                        .SetProperty(a => a.AvailableDuration, a =>
+                            a.AvailableDuration - (dateTimeProvider.UtcNow - a.LastLoginAt)));
         }
     }
 }
