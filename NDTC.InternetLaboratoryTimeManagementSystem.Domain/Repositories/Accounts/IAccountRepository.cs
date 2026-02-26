@@ -11,5 +11,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
         Task SetIsLoggedInToFalseAndReComputeAvailableDurationAsync();
 
         Task ResetAllAccountDurationsAsync();
+
+        Task<Account?> FindBySchoolIdAsync(string schoolId);
     }
 }

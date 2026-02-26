@@ -11,6 +11,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
         IDateTimeProvider dateTimeProvider)
         : IAccountRepository
     {
+        public async Task<Account?> FindBySchoolIdAsync(string schoolId)
+        {
+            return await context.Accounts
+                .FirstOrDefaultAsync(a => a.User.SchoolId == schoolId);
+        }
+
         public async Task<Account?> FindByRFIDWithUserAsync(string rfid)
         {
             return await context.Accounts

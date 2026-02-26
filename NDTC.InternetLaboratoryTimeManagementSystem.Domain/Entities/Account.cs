@@ -61,5 +61,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
             IsLoggedIn = false;
         }
+
+        public void SetRFID(string rfid)
+        {
+            if (RFID == rfid)
+                return;
+
+            RFID = rfid;
+        }
     }
 }

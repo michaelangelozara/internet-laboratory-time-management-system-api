@@ -31,11 +31,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
 
                 return Result.Success(user.Id);
             }
-            catch (DbUpdateException ex) when (DuplicateUpdateHelper.SchoolIdDuplicate(ex))
+            catch (DbUpdateException ex) when (DuplicateUpdateHelper.DuplicateSchoolId(ex))
             {
                 return Result.Failure<Guid>(Error.InvalidSchoolId());
             }
-            catch (DbUpdateException ex) when (DuplicateUpdateHelper.RFIDDuplicate(ex))
+            catch (DbUpdateException ex) when (DuplicateUpdateHelper.DuplicateRFID(ex))
             {
                 return Result.Failure<Guid>(Error.InvalidRFID());
             }
