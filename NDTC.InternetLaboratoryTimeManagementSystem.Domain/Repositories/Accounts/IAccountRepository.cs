@@ -8,6 +8,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
 
         Task<Account?> FindByUserIdAsync(Guid userId);
 
-        Task SetIsLoggedInToFalseAndReComputeAvailableDuration();
+        Task SetIsLoggedInToFalseAndReComputeAvailableDurationAsync();
+
+        Task ResetAllAccountDurationsAsync();
     }
 }

@@ -3,5 +3,7 @@
     public interface IAccountService
     {
         Task LogoutAllAccounts();
+        
+        Task ResetAllAccountDurations();
     }
 }

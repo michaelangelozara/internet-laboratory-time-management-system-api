@@ -13,9 +13,14 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
         {
             await unitOfWork.BeginTransactionAsync();
 
-            await accountRepository.SetIsLoggedInToFalseAndReComputeAvailableDuration();
+            await accountRepository.SetIsLoggedInToFalseAndReComputeAvailableDurationAsync();
 
             await unitOfWork.CommitAsync();
+        }
+
+        public async Task ResetAllAccountDurations()
+        {
+            await accountRepository.ResetAllAccountDurationsAsync();
         }
     }
 }

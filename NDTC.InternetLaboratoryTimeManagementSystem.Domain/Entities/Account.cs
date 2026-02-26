@@ -1,5 +1,6 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
@@ -31,7 +32,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             {
                 Id = Guid.NewGuid(),
                 RFID = rfid,
-                AvailableDuration = TimeSpan.FromHours(2),
+                AvailableDuration = Duration.DefaultAccountDuration,
                 LastLoginAt = DateTime.UtcNow
             };
 

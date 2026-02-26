@@ -2,6 +2,7 @@
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
@@ -27,7 +28,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .FirstOrDefaultAsync(a => a.UserId == userId);
         }
 
-        public async Task SetIsLoggedInToFalseAndReComputeAvailableDuration()
+        public async Task ResetAllAccountDurationsAsync()
+        {
+            await context.Accounts
+                .Where(a => a.LastLoginAt < dateTimeProvider.UtcNow.Date)
+                .ExecuteUpdateAsync(setter =>
+                    setter
+                        .SetProperty(a => a.AvailableDuration, Duration.DefaultAccountDuration));
+        }
+
+        public async Task SetIsLoggedInToFalseAndReComputeAvailableDurationAsync()
         {
             await context.Accounts
                 .Where(a => a.IsLoggedIn)

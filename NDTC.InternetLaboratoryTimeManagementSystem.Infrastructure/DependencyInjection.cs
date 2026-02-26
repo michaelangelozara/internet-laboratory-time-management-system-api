@@ -12,14 +12,17 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authorization;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.BackgroundJobs;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Database.Repositories;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Options;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Time;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
+using Quartz;
 using System.Security.Claims;
 using System.Text;
 
@@ -35,7 +38,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                 .AddAuthenticationInternal(configuration)
                 .AddAuthorizationInternal()
                 .AddOptions(configuration)
-                .AddRepositories();
+                .AddRepositories()
+                .AddBackgroundJobs();
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
@@ -149,6 +153,18 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
         private static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+            return services;
+        }
+
+        private static IServiceCollection AddBackgroundJobs(this IServiceCollection services)
+        {
+            services.AddQuartz(q =>
+            {
+                // runs every 10 minutes
+                q.AddScheduledJob<DurationProcessorJob>(nameof(DurationProcessorJob), "0 0/10 * * * ?");
+            });
+
+            services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
             return services;
         }
     }
