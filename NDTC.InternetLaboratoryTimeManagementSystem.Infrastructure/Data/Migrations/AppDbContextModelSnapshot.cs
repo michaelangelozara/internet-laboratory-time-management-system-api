@@ -223,6 +223,33 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.ToTable("role_claims", (string)null);
                 });
 
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.SessionHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("AccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_id");
+
+                    b.Property<TimeSpan>("ConsumedTime")
+                        .HasColumnType("interval")
+                        .HasColumnName("consumed_time");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("session_histories", (string)null);
+                });
+
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -294,6 +321,17 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.SessionHistory", b =>
+                {
+                    b.HasOne("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Account", "Account")
+                        .WithMany("SessionHistories")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.UserRole", b =>
                 {
                     b.HasOne("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Role", "Role")
@@ -327,6 +365,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.Navigation("Evaluations");
 
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Account", b =>
+                {
+                    b.Navigation("SessionHistories");
                 });
 
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Role", b =>

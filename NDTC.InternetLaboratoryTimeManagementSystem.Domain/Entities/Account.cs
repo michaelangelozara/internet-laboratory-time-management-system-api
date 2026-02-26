@@ -19,6 +19,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public User? User { get; private set; }
 
+        public ICollection<SessionHistory> SessionHistories { get; } = [];
+
         protected Account() { }
 
         public static Account Create(string rfid)
@@ -42,7 +44,20 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public void LogOut()
         {
+            LoadSessionHistory();
+
             IsLoggedIn = false;
+        }
+
+        private void LoadSessionHistory()
+        {
+            if (!IsLoggedIn) 
+                return;
+
+            // adding session history must only work if the account is logged in
+            TimeSpan consumedTime = TotalDuration - RemainingDuration;
+            var sessionHistory = SessionHistory.Create(consumedTime);
+            SessionHistories.Add(sessionHistory);
         }
 
     }
