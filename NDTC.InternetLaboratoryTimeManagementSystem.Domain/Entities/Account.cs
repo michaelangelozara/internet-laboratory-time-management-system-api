@@ -1,5 +1,6 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 {
@@ -9,9 +10,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public DateTime? LastLoginAt { get; private set; }
 
-        public TimeSpan RemainingDuration => (TotalDuration - (DateTime.UtcNow - LastLoginAt)) ?? TimeSpan.Zero;
+        [NotMapped]
+        private TimeSpan RemainingDuration => (AvailableDuration - (DateTime.UtcNow - LastLoginAt)) ?? TimeSpan.Zero;
         
-        public TimeSpan TotalDuration { get; private set; }
+        public TimeSpan AvailableDuration { get; private set; }
 
         public bool IsLoggedIn { get; private set; } = false;
 
@@ -29,7 +31,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             {
                 Id = Guid.NewGuid(),
                 RFID = rfid,
-                TotalDuration = TimeSpan.FromHours(2),
+                AvailableDuration = TimeSpan.FromHours(2),
                 LastLoginAt = DateTime.UtcNow
             };
 
@@ -44,21 +46,19 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public void LogOut()
         {
-            LoadSessionHistory();
+            if (!IsLoggedIn)
+                return;
+
+            // persist a new session history
+            // adding session history must only work if the account is logged in
+            TimeSpan consumedTime = AvailableDuration - RemainingDuration;
+            var sessionHistory = SessionHistory.Create(consumedTime);
+            SessionHistories.Add(sessionHistory);
+
+            // re-set the total duration
+            AvailableDuration = RemainingDuration;
 
             IsLoggedIn = false;
         }
-
-        private void LoadSessionHistory()
-        {
-            if (!IsLoggedIn) 
-                return;
-
-            // adding session history must only work if the account is logged in
-            TimeSpan consumedTime = TotalDuration - RemainingDuration;
-            var sessionHistory = SessionHistory.Create(consumedTime);
-            SessionHistories.Add(sessionHistory);
-        }
-
     }
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260226133008_Init")]
+    [Migration("20260226151821_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -96,6 +96,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<TimeSpan>("AvailableDuration")
+                        .HasColumnType("interval")
+                        .HasColumnName("available_duration");
+
                     b.Property<bool>("IsLoggedIn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
@@ -111,10 +115,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("rfid");
-
-                    b.Property<TimeSpan>("TotalDuration")
-                        .HasColumnType("interval")
-                        .HasColumnName("total_duration");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")

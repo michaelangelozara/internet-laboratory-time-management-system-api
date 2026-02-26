@@ -5,5 +5,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
     public interface IAccountRepository
     {
         Task<Account?> FindByRFIDWithUserAsync(string rfid);
+
+        Task<Account?> FindByUserIdAsync(Guid userId);
     }
 }

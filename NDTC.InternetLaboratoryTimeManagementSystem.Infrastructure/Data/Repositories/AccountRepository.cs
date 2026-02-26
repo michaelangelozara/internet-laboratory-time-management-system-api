@@ -17,5 +17,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                             .ThenInclude(r => r.RoleClaims)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<Account?> FindByUserIdAsync(Guid userId)
+        {
+            return await context.Accounts
+                .FirstOrDefaultAsync(a => a.UserId == userId);
+        }
     }
 }

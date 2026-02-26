@@ -26,8 +26,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
                 .HasColumnType("timestamp with time zone")
                 .IsRequired(false);
 
-            builder.Property(a => a.TotalDuration)
-                .HasColumnName("total_duration")
+            builder.Property(a => a.AvailableDuration)
+                .HasColumnName("available_duration")
                 .HasColumnType("interval")
                 .IsRequired();
 
@@ -43,8 +43,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
                 .HasForeignKey<Account>(a => a.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Ignore(a => a.RemainingDuration);
         }
     }
 }

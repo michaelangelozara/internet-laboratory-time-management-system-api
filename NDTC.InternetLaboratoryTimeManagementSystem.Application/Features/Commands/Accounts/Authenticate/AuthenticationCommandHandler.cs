@@ -22,6 +22,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             if (account is null)
                 return Result.Failure<AuthenticationResponseDTO>(Error.NotFound("Account.Invalid", "Invalid rfid."));
 
+            if(account.IsLoggedIn)
+                return Result.Failure<AuthenticationResponseDTO>(Error.Problem("Account.Invalid", "Already logged in on another computer."));
+
             var user = account.User!;
 
             var roles = roleManager.GetRoles(user);
@@ -31,13 +34,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             if (roles.Contains(Roles.Admin) || roles.Contains(Roles.SuperAdmin))
                 return Result.Success(new AuthenticationResponseDTO(token, null));
 
-            if (account.RemainingDuration <= TimeSpan.Zero)
+            if (account.AvailableDuration <= TimeSpan.Zero)
                 return Result.Failure<AuthenticationResponseDTO>(Error.NotFound("Account.Invalid", "You already consumed your time."));
 
             account.MarkAsLoggedIn();
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result.Success(new AuthenticationResponseDTO(token, account.RemainingDuration));
+            return Result.Success(new AuthenticationResponseDTO(token, account.AvailableDuration));
         }
     }
 }

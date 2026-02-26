@@ -93,6 +93,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<TimeSpan>("AvailableDuration")
+                        .HasColumnType("interval")
+                        .HasColumnName("available_duration");
+
                     b.Property<bool>("IsLoggedIn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
@@ -108,10 +112,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("rfid");
-
-                    b.Property<TimeSpan>("TotalDuration")
-                        .HasColumnType("interval")
-                        .HasColumnName("total_duration");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")

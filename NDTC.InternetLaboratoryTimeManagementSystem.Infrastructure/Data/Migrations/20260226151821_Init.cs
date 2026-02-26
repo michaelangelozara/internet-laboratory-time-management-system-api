@@ -64,7 +64,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     rfid = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     last_login_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    total_duration = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    available_duration = table.Column<TimeSpan>(type: "interval", nullable: false),
                     is_logged_in = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
