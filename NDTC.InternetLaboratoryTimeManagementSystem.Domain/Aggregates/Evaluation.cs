@@ -38,5 +38,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
             return evaluation;
         }
+
+        public void SetQuestion(string question)
+        {
+            Question = question;
+        }
     }
 }

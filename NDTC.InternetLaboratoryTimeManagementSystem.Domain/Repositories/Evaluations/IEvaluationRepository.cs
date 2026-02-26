@@ -5,5 +5,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evalua
     public interface IEvaluationRepository : IBaseRepository<Evaluation>
     {
         Task DeactivateAllEvaluations();
+
+        Task<Evaluation?> FindByIdAsync(Guid id);
     }
 }

@@ -15,5 +15,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                     setter
                         .SetProperty(e => e.Active, false));
         }
+
+        public async Task<Evaluation?> FindByIdAsync(Guid id)
+        {
+            return await context.Evaluations
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
     }
 }
