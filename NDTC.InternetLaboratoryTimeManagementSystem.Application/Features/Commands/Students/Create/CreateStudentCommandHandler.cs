@@ -1,22 +1,19 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Helpers;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
-namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Admins.Create
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Students.Create
 {
-    internal class CreateAdminCommandHandler(
-        IUserRepository userRepository,
+    internal class CreateStudentCommandHandler(
         IUnitOfWork unitOfWork,
-        IRoleManager roleManager) 
-        : IRequestHandler<CreateAdminCommand, Result<Guid>>
+        IUserRepository userRepository)
+        : IRequestHandler<CreateStudentCommand, Result<Guid>>
     {
-        public async Task<Result<Guid>> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -24,8 +21,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
 
                 var user = User.Create(request.SchoolId, request.RFID);
                 await userRepository.AddAsync(user);
-
-                await roleManager.AddToRoleAsync(user, Roles.Admin);
 
                 await unitOfWork.CommitAsync(cancellationToken);
 
