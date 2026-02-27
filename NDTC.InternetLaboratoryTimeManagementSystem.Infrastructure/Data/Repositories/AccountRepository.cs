@@ -53,5 +53,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                         .SetProperty(a => a.AvailableDuration, a =>
                             a.AvailableDuration - (dateTimeProvider.UtcNow - a.LastLoginAt)));
         }
+
+        public async Task<Account?> FindByUserIdWithUserAsNoTrackingAsync(Guid userId)
+        {
+            return await context.Accounts
+                .AsNoTracking()
+                .Include(a => a.User)
+                .FirstOrDefaultAsync(a => a.UserId == userId);
+        }
     }
 }

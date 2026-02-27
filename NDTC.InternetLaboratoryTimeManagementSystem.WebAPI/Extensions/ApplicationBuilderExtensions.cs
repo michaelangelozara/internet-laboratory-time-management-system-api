@@ -2,6 +2,7 @@
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
+using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime;
 using Scalar.AspNetCore;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
@@ -29,6 +30,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
             using var scope = app.Services.CreateAsyncScope();
             var accountService = scope.ServiceProvider.GetRequiredService<IAccountService>();
             await accountService.LogoutAllAccounts();
+        }
+
+        internal static void MapHubEndpoints(this WebApplication app)
+        {
+            string hubs = "/api/v1/hubs";
+
+            app.MapHub<SessionHub>($"{hubs}/session");
         }
     }
 }

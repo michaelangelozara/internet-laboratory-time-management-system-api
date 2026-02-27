@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
@@ -20,6 +21,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Database.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Options;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Realtime.Configurations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Time;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
@@ -40,7 +42,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                 .AddAuthorizationInternal()
                 .AddOptions(configuration)
                 .AddRepositories()
-                .AddBackgroundJobs();
+                .AddBackgroundJobs()
+                .AddSignalRWithConfiguration();
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
@@ -168,6 +171,17 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             });
 
             services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+            return services;
+        }
+
+        private static IServiceCollection AddSignalRWithConfiguration(this IServiceCollection services)
+        {
+            // enable signalr
+            services.AddSignalR();
+
+            // add signalr configuration
+            services.AddSingleton<IPostConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
+
             return services;
         }
     }

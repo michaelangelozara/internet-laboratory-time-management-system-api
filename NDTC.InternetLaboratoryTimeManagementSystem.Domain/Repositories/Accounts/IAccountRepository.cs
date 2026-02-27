@@ -13,5 +13,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
         Task ResetAllAccountDurationsAsync();
 
         Task<Account?> FindBySchoolIdAsync(string schoolId);
+
+        Task<Account?> FindByUserIdWithUserAsNoTrackingAsync(Guid userId);
     }
 }

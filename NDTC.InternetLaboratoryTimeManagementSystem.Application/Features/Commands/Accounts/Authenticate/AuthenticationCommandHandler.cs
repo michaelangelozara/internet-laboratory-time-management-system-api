@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.DTOs.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
@@ -13,7 +14,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
         IUnitOfWork unitOfWork,
         IAccountRepository accountRepository,
         IRoleManager roleManager,
-        ITokenProvider tokenProvider) 
+        ITokenProvider tokenProvider,
+        ISessionHubService sessionHubService) 
         : IRequestHandler<AuthenticationCommand, Result<AuthenticationResponseDTO>>
     {
         public async Task<Result<AuthenticationResponseDTO>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
@@ -40,6 +42,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             account.MarkAsLoggedIn();
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
+            // publish new openned sesison
+            await sessionHubService.PublishNewSessionOf(user.SchoolId, account.AvailableDuration);
+            
             return Result.Success(new AuthenticationResponseDTO(token, account.AvailableDuration));
         }
     }

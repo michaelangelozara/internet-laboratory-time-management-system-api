@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Commons\" />
     <Folder Include="Abstractions\Repositories\" />
     <Folder Include="Features\Queries\" />
   </ItemGroup>
