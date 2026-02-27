@@ -5,5 +5,7 @@
         Task PublishNewSessionOf(string schoolId, TimeSpan availableDuration);
 
         Task PublishLoggedOutSessionOf();
+
+        Task PublishUpdatedSession(Guid userId, TimeSpan duration);
     }
 }

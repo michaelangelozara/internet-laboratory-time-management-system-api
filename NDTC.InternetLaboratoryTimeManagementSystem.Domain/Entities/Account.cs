@@ -2,6 +2,7 @@
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 {
@@ -68,6 +69,19 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
                 return;
 
             RFID = rfid;
+        }
+
+        public void SetNewAvailableDuration(string duration)
+        {
+            bool isValid = TimeSpan.TryParseExact(
+                duration,
+                @"hh\:mm\:ss",
+                CultureInfo.InvariantCulture,
+                out var timeSpan);
+            if (!isValid)
+                throw new ApplicationException("Duration cannot be updated. Invalid duration format.");
+
+            AvailableDuration = timeSpan;
         }
     }
 }

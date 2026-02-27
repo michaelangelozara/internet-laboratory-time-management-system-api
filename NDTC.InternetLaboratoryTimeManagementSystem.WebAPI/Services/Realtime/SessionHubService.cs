@@ -20,5 +20,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Services.Realtime
         {
             await hubContext.Clients.All.NewSession(schoolId, availableDuration);
         }
+
+        public async Task PublishUpdatedSession(Guid userId, TimeSpan duration)
+        {
+            await hubContext.Clients.User(userId.ToString()).UpdatedSession(duration);
+        }
     }
 }

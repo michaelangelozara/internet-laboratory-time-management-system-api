@@ -13,6 +13,7 @@
         public static class Account
         {
             public const string UpdateRFID = "accounts:update_rfid";
+            public const string UpdateDuration = "accounts:update_duration";
         }
 
         public static class Evaluation

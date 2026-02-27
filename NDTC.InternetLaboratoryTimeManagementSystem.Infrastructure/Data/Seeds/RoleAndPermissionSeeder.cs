@@ -29,6 +29,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Delete),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Update),
+
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateDuration),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateRFID),
 
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Create),
@@ -52,11 +54,14 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Delete),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Update),
+
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateDuration),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateRFID),
 
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Create),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Delete),
-                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Update));
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Update)
+                    );
             }
         }
         #endregion
