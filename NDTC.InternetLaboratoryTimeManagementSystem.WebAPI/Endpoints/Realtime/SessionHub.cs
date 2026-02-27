@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.HubClients;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime
 {
     [Authorize]
-    public class SessionHub
+    public class SessionHub(ISessionHubService sessionHubService)
         : Hub<ISessionHubClient>
     {
-        public override Task OnDisconnectedAsync(Exception? exception)
+        public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            return base.OnDisconnectedAsync(exception);
+            await sessionHubService.PublishLoggedOutSessionOf();
+
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

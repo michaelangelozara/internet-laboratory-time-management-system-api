@@ -3,5 +3,7 @@
     public interface ISessionHubService
     {
         Task PublishNewSessionOf(string schoolId, TimeSpan availableDuration);
+
+        Task PublishLoggedOutSessionOf();
     }
 }
