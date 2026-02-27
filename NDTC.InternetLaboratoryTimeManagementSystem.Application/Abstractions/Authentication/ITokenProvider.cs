@@ -4,6 +4,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.A
 {
     public interface ITokenProvider
     {
-        string Create(User user);
+        string Create(User user, IList<string>? roles);
     }
 }

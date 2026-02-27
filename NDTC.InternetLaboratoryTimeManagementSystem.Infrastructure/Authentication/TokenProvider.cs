@@ -12,20 +12,21 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authenticat
     internal sealed class TokenProvider(IOptions<JwtOptions> options) 
         : ITokenProvider
     {
-        public string Create(User user)
+        public string Create(User user, IList<string>? roles)
         {
             var jwtOption = options.Value;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOption.SecretKey));
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            List<Claim> claims = [new(JwtRegisteredClaimNames.Sub, user.Id.ToString())];
+            
+            if (roles != null && roles.Count != 0)
+                claims.AddRange(roles.Select(r => new Claim("roles", r)));
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(
-                [
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                    //new Claim(JwtRegisteredClaimNames.Email, user.Email)
-                ]),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(jwtOption.AccessTokenExpirationMinutes),
                 SigningCredentials = credentials,
                 Issuer = jwtOption.Issuer,

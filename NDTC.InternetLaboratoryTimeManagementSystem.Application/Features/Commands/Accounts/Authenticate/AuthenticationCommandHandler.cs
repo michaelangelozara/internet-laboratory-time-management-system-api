@@ -31,7 +31,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
 
             var roles = roleManager.GetRoles(user);
 
-            var token = tokenProvider.Create(user);
+            var token = tokenProvider.Create(user, roles);
             
             if (roles.Contains(Roles.Admin) || roles.Contains(Roles.SuperAdmin))
                 return Result.Success(new AuthenticationResponseDTO(token, null));
