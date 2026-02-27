@@ -2,7 +2,7 @@
 {
     public interface ISessionHubService
     {
-        Task PublishNewSessionOf(string schoolId, TimeSpan availableDuration);
+        Task PublishNewSessionOf(Guid userId, string schoolId, TimeSpan availableDuration);
 
         Task PublishLoggedOutSessionOf();
 

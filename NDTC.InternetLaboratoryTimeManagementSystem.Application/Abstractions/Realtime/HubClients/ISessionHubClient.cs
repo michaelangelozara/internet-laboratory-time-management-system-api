@@ -2,7 +2,7 @@
 {
     public interface ISessionHubClient
     {
-        Task NewSession(string schoolId, TimeSpan duration);
+        Task NewSession(Guid userId, string schoolId, TimeSpan duration);
 
         Task LoggedOutSession(Guid userId);
 

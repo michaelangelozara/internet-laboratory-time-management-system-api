@@ -43,7 +43,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
             // publish new openned sesison
-            await sessionHubService.PublishNewSessionOf(user.SchoolId, account.AvailableDuration);
+            await sessionHubService.PublishNewSessionOf(user.Id, user.SchoolId, account.AvailableDuration);
             
             return Result.Success(new AuthenticationResponseDTO(token, account.AvailableDuration));
         }
