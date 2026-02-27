@@ -5,5 +5,7 @@
         Task LogoutAllAccounts();
         
         Task ResetAllAccountDurations();
+
+        Task TerminateInvalidSessions();
     }
 }

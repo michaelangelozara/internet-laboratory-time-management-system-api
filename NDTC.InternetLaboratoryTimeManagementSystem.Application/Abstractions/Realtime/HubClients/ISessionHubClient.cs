@@ -7,5 +7,7 @@
         Task LoggedOutSession(Guid userId);
 
         Task UpdatedSession(TimeSpan duration);
+
+        Task Terminate();
     }
 }

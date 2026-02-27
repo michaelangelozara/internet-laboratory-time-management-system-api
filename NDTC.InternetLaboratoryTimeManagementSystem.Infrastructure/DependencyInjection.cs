@@ -168,6 +168,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             {
                 // runs every 10 minutes
                 q.AddScheduledJob<DurationProcessorJob>(nameof(DurationProcessorJob), "0 0/10 * * * ?");
+
+                // runs every 5 seconds
+                q.AddScheduledJob<DurationTerminationProcessor>(nameof(DurationTerminationProcessor), "0/5 * * * * ?");
             });
 
             services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);

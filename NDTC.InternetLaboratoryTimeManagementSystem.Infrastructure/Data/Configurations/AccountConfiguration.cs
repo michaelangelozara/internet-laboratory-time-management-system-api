@@ -43,6 +43,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
                 .HasForeignKey<Account>(a => a.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Ignore(a => a.RemainingDuration);
         }
     }
 }

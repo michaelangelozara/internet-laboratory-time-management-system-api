@@ -15,5 +15,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
         Task<Account?> FindBySchoolIdAsync(string schoolId);
 
         Task<Account?> FindByUserIdWithUserAsNoTrackingAsync(Guid userId);
+
+        Task<IEnumerable<Account>> FindLoggedInAccountsByCountAsync(int count);
     }
 }

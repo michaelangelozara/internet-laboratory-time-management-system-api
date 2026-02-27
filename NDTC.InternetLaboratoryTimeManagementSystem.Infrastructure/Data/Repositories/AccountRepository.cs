@@ -61,5 +61,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .Include(a => a.User)
                 .FirstOrDefaultAsync(a => a.UserId == userId);
         }
+
+        public async Task<IEnumerable<Account>> FindLoggedInAccountsByCountAsync(int count)
+        {
+            return await context.Accounts
+                .Where(a => a.IsLoggedIn)
+                .Take(count)
+                .ToListAsync();
+        }
     }
 }

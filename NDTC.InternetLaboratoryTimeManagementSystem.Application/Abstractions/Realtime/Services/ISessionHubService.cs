@@ -7,5 +7,7 @@
         Task PublishLoggedOutSessionOf();
 
         Task PublishUpdatedSession(Guid userId, TimeSpan duration);
+
+        Task PublishTerminationTo(Guid userId);
     }
 }
