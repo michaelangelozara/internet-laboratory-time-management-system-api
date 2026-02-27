@@ -1,0 +1,53 @@
+name: Internet Laboratory Time Management System CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+env:
+  RENDER_WEBAPP_NAME: "Internet Laboratory Time Management System"
+  SOLUTION_PATH: "NDTC.InternetLaboratoryTimeManagementSystem.slnx"
+  DOTNET_VERSION: "10.x"
+  EF_CORE_CLI_VERSION: "10.*"
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore Project
+        run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
+
+      - name: Install EF Core CLI
+        run: dotnet tool install --global dotnet-ef --version ${{ env.EF_CORE_CLI_VERSION }}
+
+      - name: Add .NET tools to PATH
+        run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: Run EF Core migrations
+        run: dotnet ef database update -c AppDbContext -p ./NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure -s ./NDTC.InternetLaboratoryTimeManagementSystem.WebAPI --connection "${{ secrets.DATABASE_CONNECTION_STRING }}"
+
+      - name: Test
+        run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build --verbosity normal
+
+  doploy:
+    name: Deyploy to Render
+    runs-on: ubuntu-latest
+    needs: [build-and-test]
+    steps:
+      - name: Triggering Render deploy
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
