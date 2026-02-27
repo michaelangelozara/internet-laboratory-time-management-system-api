@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Accounts.Authenticate;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions;

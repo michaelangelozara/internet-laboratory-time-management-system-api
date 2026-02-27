@@ -21,12 +21,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    await app.UseMigration();
-
-    await app.UseLogoutAllAccounts();
-
     app.UseScalarUI();
 }
+
+await app.UseMigration();
+
+await app.UseLogoutAllAccounts();
 
 app.UseHttpsRedirection();
 
