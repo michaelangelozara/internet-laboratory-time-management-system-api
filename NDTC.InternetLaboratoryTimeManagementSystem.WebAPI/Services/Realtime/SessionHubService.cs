@@ -21,6 +21,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Services.Realtime
             await hubContext.Clients.All.NewSession(userId, schoolId, availableDuration);
         }
 
+        public async Task PublishTerminatedUserId(Guid userId)
+        {
+            await hubContext.Clients.All.LoggedOutSession(userId);
+        }
+
         public async Task PublishTerminationTo(Guid userId)
         {
             await hubContext.Clients.User(userId.ToString()).Terminate();

@@ -9,5 +9,7 @@
         Task PublishUpdatedSession(Guid userId, TimeSpan duration);
 
         Task PublishTerminationTo(Guid userId);
+
+        Task PublishTerminatedUserId(Guid userId);
     }
 }

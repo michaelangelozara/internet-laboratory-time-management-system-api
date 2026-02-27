@@ -37,6 +37,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
                     {
                         account.LogOut();
                         await sessionHubService.PublishTerminationTo(account.UserId);
+                        await sessionHubService.PublishTerminatedUserId(account.UserId);
                     }
                 }
 
