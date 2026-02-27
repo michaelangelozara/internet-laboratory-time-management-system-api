@@ -22,7 +22,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
                 return result.Match((id) => Results.Ok(id), CustomResults.Problem);
             })
                 .HasPermission(Permissions.Account.UpdateDuration)
-                .WithTags(Tags.Accounts);
+                .WithTags(Tags.Accounts)
+                .WithDescription("This is used to update the time/duration of the particular user.")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound);
         }
     }
 }

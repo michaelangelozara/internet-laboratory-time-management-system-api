@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
 
             bool alreadyAnswered = await answerEvaluationRepository.DoesExistByEvaluationIdAndUserIdAsync(request.EvaluationId, userId);
             if(alreadyAnswered)
-                return Result.Failure<Guid>(Error.NotFound("Evaluation.Invalid", "You answered already."));
+                return Result.Failure<Guid>(Error.Problem("Evaluation.Invalid", "You answered already."));
 
             var addingResult = evaluation.AddAnswerEvaluation(request.Comment, request.EvaluationType, userId);
             if(addingResult.IsFailure)

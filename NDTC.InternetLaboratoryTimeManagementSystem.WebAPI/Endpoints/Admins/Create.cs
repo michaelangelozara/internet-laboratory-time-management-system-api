@@ -22,7 +22,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Admins
                 return result.Match((id) => Results.Created($"/api/v1/users/admins/{id}", id), CustomResults.Problem);
             })
                 .WithTags(Tags.Users)
-                .HasPermission(Permissions.User.Create);
+                .HasPermission(Permissions.User.Create)
+                .WithDescription("This is used to create a user with an admin role.")
+                .Produces(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status409Conflict);
         }
     }
 }

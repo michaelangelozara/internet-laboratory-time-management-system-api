@@ -22,7 +22,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
                 return result.Match((id) => Results.Created($"/api/v1/evaluations/{id}", id), CustomResults.Problem);
             })
                 .HasPermission(Permissions.Evaluation.Create)
-                .WithTags(Tags.Evaluations);
+                .WithTags(Tags.Evaluations)
+                .WithDescription("This is used to create an evaluation.")
+                .Produces(StatusCodes.Status201Created);
         }
     }
 }

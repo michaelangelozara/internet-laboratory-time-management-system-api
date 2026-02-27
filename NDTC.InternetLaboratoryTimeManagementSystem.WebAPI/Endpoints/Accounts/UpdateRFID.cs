@@ -22,7 +22,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
                 return result.Match(() => Results.Ok(), CustomResults.Problem);
             })
                 .HasPermission(Permissions.Account.UpdateRFID)
-                .WithTags(Tags.Accounts);
+                .WithTags(Tags.Accounts)
+                .WithDescription("This is used to update the rfid of the particular user.")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status409Conflict);
         }
     }
 }

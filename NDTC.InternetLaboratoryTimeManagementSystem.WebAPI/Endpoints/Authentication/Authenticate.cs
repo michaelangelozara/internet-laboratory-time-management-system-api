@@ -1,5 +1,7 @@
 ﻿using MediatR;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.DTOs.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Accounts.Authenticate;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Infrastructure;
@@ -23,7 +25,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Authentic
                 return result.Match((data) => Results.Ok(data), CustomResults.Problem);
             })
                 .AllowAnonymous()
-                .WithTags(Tags.Accounts);
+                .WithTags(Tags.Accounts)
+                .WithDescription("Returns access token with optional duration property. If the role is admin then the duration will be null. If the role is student the duration will have a value")
+                .Produces<AuthenticationResponseDTO>(StatusCodes.Status200OK)
+                .Produces<Error>(StatusCodes.Status401Unauthorized);
         }
     }
 }

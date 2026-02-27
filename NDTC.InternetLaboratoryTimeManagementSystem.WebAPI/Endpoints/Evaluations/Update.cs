@@ -23,7 +23,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
                 return result.Match(() => Results.Ok(), CustomResults.Problem);
             })
                 .HasPermission(Permissions.Evaluation.Update)
-                .WithTags(Tags.Evaluations);
+                .WithTags(Tags.Evaluations)
+                .WithDescription("This is used to update a the evaluation.")
+                .Produces(StatusCodes.Status200OK);
         }
     }
 }

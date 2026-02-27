@@ -23,7 +23,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Students
                 return result.Match((id) => Results.Created($"/api/v1/users/students/{id}", id), CustomResults.Problem);
             })
                 .HasPermission(Permissions.User.Create)
-                .WithTags(Tags.Users);
+                .WithTags(Tags.Users)
+                .WithDescription("This is used to create a user with a student role.")
+                .Produces(StatusCodes.Status201Created)
+                .Produces(StatusCodes.Status409Conflict);
         }
     }
 }

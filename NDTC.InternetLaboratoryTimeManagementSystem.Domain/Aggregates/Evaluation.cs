@@ -48,7 +48,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
         public Result AddAnswerEvaluation(string comment, string evaluationType, Guid userId)
         {
             if (!Enum.TryParse<EvaluationType>(evaluationType, out var t))
-                return Result.Failure(Error.Validation("EvaluationType.Invalid", $"{evaluationType} cannot be parsed as AnswerEvaluation's type."));
+                return Result.Failure(Error.Problem("EvaluationType.Invalid", $"{evaluationType} cannot be parsed as AnswerEvaluation's type."));
 
             var answerEvaluation = AnswerEvaluation.Create(comment, t, userId);
             AnswerEvaluations.Add(answerEvaluation);

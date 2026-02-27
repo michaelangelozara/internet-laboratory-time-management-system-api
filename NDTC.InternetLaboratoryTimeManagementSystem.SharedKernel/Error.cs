@@ -31,10 +31,10 @@
             new(code, description, ErrorType.Problem);
 
         public static Error InvalidSchoolId() =>
-            new("SchoolId.Invalid", "School id is existing.", ErrorType.Problem);
+            new("SchoolId.Invalid", "School id is existing.", ErrorType.Conflict);
 
         public static Error InvalidRFID() =>
-            new("RFID.Invalid", "RFID is existing.", ErrorType.Problem);
+            new("RFID.Invalid", "RFID is existing.", ErrorType.Conflict);
 
         public static Error Conflict(string code, string description) =>
             new(code, description, ErrorType.Conflict);

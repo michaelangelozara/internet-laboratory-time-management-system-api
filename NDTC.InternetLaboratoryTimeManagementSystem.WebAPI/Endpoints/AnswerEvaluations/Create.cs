@@ -22,7 +22,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.AnswerEva
 
                 return result.Match((id) => Results.Created($"/api/v1/evaluations/answers/{id}", id), CustomResults.Problem);
             })
-                .WithTags(Tags.Evaluations);
+                .WithTags(Tags.Evaluations)
+                .WithDescription("This is used to create an answer evaluation. This is basically where student's answers go.")
+                .Produces(StatusCodes.Status200OK)
+                .Produces(StatusCodes.Status404NotFound)
+                .Produces(StatusCodes.Status400BadRequest);
         }
     }
 }
