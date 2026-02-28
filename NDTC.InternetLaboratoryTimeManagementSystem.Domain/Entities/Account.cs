@@ -1,6 +1,7 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
@@ -11,6 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public DateTime? LastLoginAt { get; private set; }
 
+        [NotMapped]
         public TimeSpan RemainingDuration => (AvailableDuration - (DateTime.UtcNow - LastLoginAt)) ?? TimeSpan.Zero;
         
         public TimeSpan AvailableDuration { get; private set; }

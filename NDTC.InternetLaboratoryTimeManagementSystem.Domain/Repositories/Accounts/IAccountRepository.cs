@@ -1,8 +1,9 @@
-﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts
 {
-    public interface IAccountRepository
+    public interface IAccountRepository : IPagedRepository<AccountResponseDTO, bool?>
     {
         Task<Account?> FindByRFIDWithUserAsync(string rfid);
 

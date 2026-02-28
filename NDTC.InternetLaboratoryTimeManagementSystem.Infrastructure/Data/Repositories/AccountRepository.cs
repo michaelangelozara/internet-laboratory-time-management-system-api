@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 
@@ -68,6 +71,44 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .Where(a => a.IsLoggedIn)
                 .Take(count)
                 .ToListAsync();
+        }
+
+        public async Task<PagedResult<AccountResponseDTO>> GetPagedAsync(int pageNumber, int pageSize, bool? active)
+        {
+            var accounts = context.Accounts
+                .AsNoTracking()
+                .Where(a => a.User != null && !a.User.UserRoles.Any());
+
+            if(active.HasValue)
+            {
+                if (active.Value)
+                {
+                    return await accounts.Where(a => a.IsLoggedIn)
+                        .Select(a => new AccountResponseDTO(
+                            a.Id,
+                            a.UserId,
+                            a.IsLoggedIn,
+                            (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero))
+                            .ToPagedResultAsync(pageNumber, pageSize);
+                }
+                else
+                {
+                    return await accounts.Where(a => !a.IsLoggedIn)
+                        .Select(a => new AccountResponseDTO(
+                            a.Id,
+                            a.UserId,
+                            a.IsLoggedIn,
+                            a.AvailableDuration))
+                            .ToPagedResultAsync(pageNumber, pageSize);
+                }
+            }
+
+            return await accounts.Select(a => new AccountResponseDTO(
+                a.Id,
+                a.UserId,
+                a.IsLoggedIn,
+                a.IsLoggedIn ? (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero : a.AvailableDuration))
+                .ToPagedResultAsync(pageNumber, pageSize);
         }
     }
 }

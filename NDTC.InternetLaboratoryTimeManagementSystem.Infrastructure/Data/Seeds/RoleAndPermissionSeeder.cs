@@ -30,6 +30,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Update),
 
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateDuration),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateRFID),
 
@@ -55,6 +56,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.User.Update),
 
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.Read),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateDuration),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Account.UpdateRFID),
 

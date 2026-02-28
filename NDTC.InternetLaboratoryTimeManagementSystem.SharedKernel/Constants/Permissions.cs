@@ -14,6 +14,7 @@
         {
             public const string UpdateRFID = "accounts:update_rfid";
             public const string UpdateDuration = "accounts:update_duration";
+            public const string Read = "accounts:read";
         }
 
         public static class Evaluation
