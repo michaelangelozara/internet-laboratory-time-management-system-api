@@ -12,14 +12,14 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Configuration
         {
             builder.Property(e => e.CreatedAt)
                 .HasColumnName("created_at")
-                .HasColumnType("timestamp with time zone")
-                .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'")
+                .HasColumnType("timestamptz")
+                .HasDefaultValueSql("now()")
                 .IsRequired();
             builder.HasIndex(e => e.CreatedAt);
 
             builder.Property(e => e.LastModifiedAt)
                 .HasColumnName("last_modified_at")
-                .HasColumnType("timestamp with time zone")
+                .HasColumnType("timestamptz")
                 .IsRequired(false);
             builder.HasIndex(e => e.LastModifiedAt);
 

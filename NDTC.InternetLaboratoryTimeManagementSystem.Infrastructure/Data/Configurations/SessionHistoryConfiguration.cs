@@ -21,7 +21,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(sh => sh.CreatedAt)
                 .HasColumnName("created_at")
                 .HasColumnType("timestamptz")
-                .HasDefaultValueSql("NOW()")
+                .HasDefaultValueSql("now()")
                 .IsRequired();
 
             builder.Property(sh => sh.AccountId)

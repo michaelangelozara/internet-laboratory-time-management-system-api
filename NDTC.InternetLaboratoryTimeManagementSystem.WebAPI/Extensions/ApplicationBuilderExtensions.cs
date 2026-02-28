@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime;
 using Scalar.AspNetCore;
