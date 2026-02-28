@@ -20,8 +20,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
 
             builder.Property(sh => sh.CreatedAt)
                 .HasColumnName("created_at")
-                .HasColumnType("timestamp with time zone")
-                .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'")
+                .HasColumnType("timestamptz")
+                .HasDefaultValueSql("NOW()")
                 .IsRequired();
 
             builder.Property(sh => sh.AccountId)

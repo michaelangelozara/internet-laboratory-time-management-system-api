@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Enums.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Extensions;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Configurations

@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
-using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime;
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Infrastructure;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Services.Realtime;
@@ -24,6 +22,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI
             {
                 options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
                 options.SerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower;
+
+                // add custom Date and Time format
+                options.SerializerOptions.Converters.Add(new CustomDateTimeJsonConverter("yyyy-MM-dd HH:mm:ss"));
             });
 
             services.AddRealtimeServices();

@@ -1,4 +1,5 @@
 ﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Evaluations;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations
 {
@@ -7,5 +8,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evalua
         Task DeactivateAllEvaluations();
 
         Task<Evaluation?> FindByIdAsync(Guid id);
+
+        Task<EvaluationResponseDTO?> FindEvaluationResponseDTOByIdAsync();
     }
 }

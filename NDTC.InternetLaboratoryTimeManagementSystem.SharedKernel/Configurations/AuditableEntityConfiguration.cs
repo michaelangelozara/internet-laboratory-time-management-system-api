@@ -11,10 +11,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Configuration
         public void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.Property(e => e.CreatedAt)
-            .HasColumnName("created_at")
-            .HasColumnType("timestamp with time zone")
-            .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'")
-            .IsRequired();
+                .HasColumnName("created_at")
+                .HasColumnType("timestamp with time zone")
+                .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'")
+                .IsRequired();
             builder.HasIndex(e => e.CreatedAt);
 
             builder.Property(e => e.LastModifiedAt)

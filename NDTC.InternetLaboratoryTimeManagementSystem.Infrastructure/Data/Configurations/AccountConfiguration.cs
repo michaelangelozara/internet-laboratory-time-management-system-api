@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
 
             builder.Property(a => a.LastLoginAt)
                 .HasColumnName("last_login_at")
-                .HasColumnType("timestamp with time zone")
+                .HasColumnType("timestamptz")
                 .IsRequired(false);
 
             builder.Property(a => a.AvailableDuration)

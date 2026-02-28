@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260226170610_Init")]
+    [Migration("20260228133144_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -119,7 +119,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnName("is_logged_in");
 
                     b.Property<DateTime?>("LastLoginAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamptz")
                         .HasColumnName("last_login_at");
 
                     b.Property<string>("RFID")
@@ -254,9 +254,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamptz")
                         .HasColumnName("created_at")
-                        .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id");
 
