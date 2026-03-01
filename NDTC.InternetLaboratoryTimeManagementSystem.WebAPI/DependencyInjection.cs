@@ -17,9 +17,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI
             // add all endpoints from this assembly
             services.AddEndpoints(Assembly.GetExecutingAssembly());
 
-            // make all json property naming convention to snake case
             services.ConfigureHttpJsonOptions(options =>
             {
+                // make all json property naming convention to snake case
                 options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
                 options.SerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower;
 

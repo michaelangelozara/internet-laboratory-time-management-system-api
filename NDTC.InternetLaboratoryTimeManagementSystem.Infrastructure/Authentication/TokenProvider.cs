@@ -19,7 +19,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authenticat
 
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            List<Claim> claims = [new(JwtRegisteredClaimNames.Sub, user.Id.ToString())];
+            List<Claim> claims = [
+                new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+                new("school_id", user.SchoolId)
+            ];
             
             if (roles != null && roles.Count != 0)
                 claims.AddRange(roles.Select(r => new Claim("roles", r)));
