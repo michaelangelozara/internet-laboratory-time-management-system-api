@@ -23,6 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
         public async Task<Account?> FindByRFIDWithUserAsync(string rfid)
         {
             return await context.Accounts
+                .AsSplitQuery()
                 .Where(a => a.RFID == rfid)
                 .Include(a => a.User)
                     .ThenInclude(u => u.UserRoles)
