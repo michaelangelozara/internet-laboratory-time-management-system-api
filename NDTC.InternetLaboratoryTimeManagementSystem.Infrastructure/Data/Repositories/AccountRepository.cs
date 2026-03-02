@@ -87,6 +87,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                         .Select(a => new AccountResponseDTO(
                             a.Id,
                             a.UserId,
+                            a.User!.SchoolId,
                             a.IsLoggedIn,
                             (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero))
                             .ToPagedResultAsync(pageNumber, pageSize);
@@ -97,6 +98,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                         .Select(a => new AccountResponseDTO(
                             a.Id,
                             a.UserId,
+                            a.User!.SchoolId,
                             a.IsLoggedIn,
                             a.AvailableDuration))
                             .ToPagedResultAsync(pageNumber, pageSize);
@@ -106,6 +108,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             return await accounts.Select(a => new AccountResponseDTO(
                 a.Id,
                 a.UserId,
+                a.User!.SchoolId,
                 a.IsLoggedIn,
                 a.IsLoggedIn ? (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero : a.AvailableDuration))
                 .ToPagedResultAsync(pageNumber, pageSize);
