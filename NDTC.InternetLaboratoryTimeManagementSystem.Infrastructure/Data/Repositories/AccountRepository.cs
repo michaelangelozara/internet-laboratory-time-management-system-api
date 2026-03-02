@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
@@ -110,6 +109,18 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 a.IsLoggedIn,
                 a.IsLoggedIn ? (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero : a.AvailableDuration))
                 .ToPagedResultAsync(pageNumber, pageSize);
+        }
+
+        public async Task<bool> IsSignedInByUserIdAsync(Guid userId)
+        {
+            return await context.Accounts
+                .AnyAsync(a => a.UserId == userId && a.IsLoggedIn);
+        }
+
+        public async Task<bool> DoesExistByUserIdAsync(Guid userId)
+        {
+            return await context.Accounts
+                .AnyAsync(a => a.UserId == userId);
         }
     }
 }

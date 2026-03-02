@@ -23,5 +23,10 @@
             public const string Update = "evaluations:update";
             public const string Delete = "evaluations:delete";
         }
+
+        public static class PC
+        {
+            public const string Restart = "pc:restart";
+        }
     }
 }

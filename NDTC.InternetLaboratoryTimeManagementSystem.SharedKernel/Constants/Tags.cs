@@ -5,5 +5,6 @@
         public const string Users = "Users";
         public const string Accounts = "Accounts";
         public const string Evaluations = "Evaluations";
+        public const string PC = "PC";
     }
 }

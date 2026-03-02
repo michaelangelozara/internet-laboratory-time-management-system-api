@@ -19,4 +19,8 @@
     <ProjectReference Include="..\NDTC.InternetLaboratoryTimeManagementSystem.Application\NDTC.InternetLaboratoryTimeManagementSystem.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StudentApiClients\" />
+  </ItemGroup>
+
 </Project>

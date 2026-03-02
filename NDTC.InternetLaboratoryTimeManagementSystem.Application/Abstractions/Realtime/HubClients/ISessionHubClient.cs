@@ -9,5 +9,7 @@
         Task UpdatedSession(TimeSpan duration);
 
         Task Terminate();
+
+        Task Restart();
     }
 }
