@@ -37,6 +37,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Create),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Delete),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Update),
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Read),
 
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.PC.Restart)
                     );
@@ -65,6 +66,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Create),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Delete),
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Update),
+                    RoleClaim.Create(CustomClaimType.Permission, Permissions.Evaluation.Read),
 
                     RoleClaim.Create(CustomClaimType.Permission, Permissions.PC.Restart)
                     );

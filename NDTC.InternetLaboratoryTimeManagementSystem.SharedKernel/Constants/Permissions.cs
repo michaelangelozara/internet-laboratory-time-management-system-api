@@ -22,6 +22,7 @@
             public const string Create = "evaluations:create";
             public const string Update = "evaluations:update";
             public const string Delete = "evaluations:delete";
+            public const string Read = "evaluations:read";
         }
 
         public static class PC

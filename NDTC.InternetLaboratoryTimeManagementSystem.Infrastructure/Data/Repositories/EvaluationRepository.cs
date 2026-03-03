@@ -3,6 +3,8 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Enums.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
@@ -27,6 +29,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
         public async Task<EvaluationResponseDTO?> FindEvaluationResponseDTOByIdAsync()
         {
             var result = await context.Evaluations
+                .AsNoTracking()
                 .Where(e => e.Active)
                 .Select(e => new
                 {
@@ -59,6 +62,22 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 result.CreatedAt,
                 result.LastModifiedAt
             );
+        }
+
+        public async Task<PagedResult<EvaluationResponseDTO>> GetPagedAsync(int pageNumber, int pageSize)
+        {
+            return await context.Evaluations
+                .AsNoTracking()
+                .OrderByDescending(e => e.CreatedAt)
+                .Select(e => new EvaluationResponseDTO(
+                    e.Id,
+                    e.Question,
+                    (float)e.AnswerEvaluations.Count(ae => ae.Type == EvaluationType.Liked) / e.AnswerEvaluations.Count() * 100,
+                    (float)e.AnswerEvaluations.Count(ae => ae.Type == EvaluationType.Disliked) / e.AnswerEvaluations.Count() * 100,
+                    e.AnswerEvaluations.Count(),
+                    e.CreatedAt,
+                    e.LastModifiedAt))
+                .ToPagedResultAsync(pageNumber, pageSize);
         }
     }
 }

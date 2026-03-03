@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Evaluations;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Evaluations.GetLatestEvaluation;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions;

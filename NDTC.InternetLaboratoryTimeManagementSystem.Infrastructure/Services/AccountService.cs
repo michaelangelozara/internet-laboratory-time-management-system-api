@@ -30,7 +30,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             try
             {
                 await unitOfWork.BeginTransactionAsync();
-                var accounts = await accountRepository.FindLoggedInAccountsByCountAsync(10);
+                var accounts = await accountRepository.FindLoggedInAccountsByCountAsync(20);
                 foreach(var account in accounts)
                 {
                     if (account.RemainingDuration <= TimeSpan.Zero)

@@ -70,6 +70,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             return await context.Accounts
                 .Where(a => a.IsLoggedIn)
                 .Take(count)
+                .OrderByDescending(a => a.LastLoginAt)
                 .ToListAsync();
         }
 

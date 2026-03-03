@@ -3,7 +3,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Evaluations;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations
 {
-    public interface IEvaluationRepository : IBaseRepository<Evaluation>
+    public interface IEvaluationRepository : IBaseRepository<Evaluation>, IPagedRepository<EvaluationResponseDTO>
     {
         Task DeactivateAllEvaluations();
 

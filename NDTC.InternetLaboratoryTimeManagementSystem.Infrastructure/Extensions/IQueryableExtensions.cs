@@ -12,6 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions
         {
             if (pageNumber < 1)
                 pageNumber = 1;
+
             if (pageSize < 1)
                 pageSize = 10;
 

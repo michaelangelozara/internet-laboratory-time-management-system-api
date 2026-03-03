@@ -3,7 +3,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
-namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Evaluations
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Evaluations.GetLatestEvaluation
 {
     internal class GetLatestEvaluationCommandHandler(
         IEvaluationRepository evaluationRepository)
