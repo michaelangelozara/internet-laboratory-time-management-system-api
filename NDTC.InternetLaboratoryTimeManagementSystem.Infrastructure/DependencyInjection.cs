@@ -85,6 +85,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                         await RoleAndPermissionSeeder.SeedAsync((AppDbContext)context, cancellationToken);
 
                         await SuperAdminSeeder.SeedAsync((AppDbContext)context, cancellationToken);
+
+                        await SettingSeeder.SeedAsync((AppDbContext)context, cancellationToken);
                     });
             });
 

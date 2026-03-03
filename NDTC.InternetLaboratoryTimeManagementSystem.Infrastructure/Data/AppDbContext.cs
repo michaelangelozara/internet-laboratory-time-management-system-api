@@ -21,6 +21,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data
 
         public DbSet<AnswerEvaluation> AnswerEvaluations { get; private set; }
 
+        public DbSet<Setting> Settings { get; private set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
