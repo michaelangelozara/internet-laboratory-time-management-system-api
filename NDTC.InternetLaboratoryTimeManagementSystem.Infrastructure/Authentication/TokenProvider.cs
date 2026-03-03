@@ -12,7 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authenticat
     internal sealed class TokenProvider(IOptions<JwtOptions> options) 
         : ITokenProvider
     {
-        public string Create(User user, IList<string>? roles)
+        public string Create(User user, IList<string>? roles, bool? hasStudentAnsweredEvaluation = default)
         {
             var jwtOption = options.Value;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOption.SecretKey));
@@ -23,6 +23,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authenticat
                 new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new("school_id", user.SchoolId)
             ];
+
+            // if the current user is student, then add the evaluationClaim
+            if (hasStudentAnsweredEvaluation.HasValue)
+                claims.Add(new("has_answered_to_evaluation", hasStudentAnsweredEvaluation.Value.ToString()));
             
             if (roles != null && roles.Count != 0)
                 claims.AddRange(roles.Select(r => new Claim("roles", r)));

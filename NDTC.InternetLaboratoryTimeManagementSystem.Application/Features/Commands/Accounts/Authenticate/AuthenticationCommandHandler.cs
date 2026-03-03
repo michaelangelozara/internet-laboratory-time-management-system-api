@@ -6,6 +6,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Application.DTOs.Authenticatio
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Accounts.Authenticate
@@ -15,7 +16,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
         IAccountRepository accountRepository,
         IRoleManager roleManager,
         ITokenProvider tokenProvider,
-        ISessionHubService sessionHubService) 
+        ISessionHubService sessionHubService,
+        IEvaluationRepository evaluationRepository) 
         : IRequestHandler<AuthenticationCommand, Result<AuthenticationResponseDTO>>
     {
         public async Task<Result<AuthenticationResponseDTO>> Handle(AuthenticationCommand request, CancellationToken cancellationToken)
@@ -30,11 +32,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             var user = account.User!;
 
             var roles = roleManager.GetRoles(user);
-
-            var token = tokenProvider.Create(user, roles);
+            
+            var adminToken = tokenProvider.Create(user, roles);
             
             if (roles.Contains(Roles.Admin) || roles.Contains(Roles.SuperAdmin))
-                return Result.Success(new AuthenticationResponseDTO(token, null));
+                return Result.Success(new AuthenticationResponseDTO(adminToken, null));
 
             if (account.AvailableDuration <= TimeSpan.Zero)
                 return Result.Failure<AuthenticationResponseDTO>(Error.NotFound("Account.Invalid", "You already consumed your time."));
@@ -42,10 +44,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             account.MarkAsLoggedIn();
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
+            bool answered = await evaluationRepository.HasAnsweredToLatestEvaluationByUserIdAsync(user.Id);
+            var studentToken = tokenProvider.Create(user, roles, answered);
+
             // publish new openned sesison
             await sessionHubService.PublishNewSessionOf(user.Id, user.SchoolId, account.AvailableDuration);
             
-            return Result.Success(new AuthenticationResponseDTO(token, account.AvailableDuration));
+            return Result.Success(new AuthenticationResponseDTO(studentToken, account.AvailableDuration));
         }
     }
 }

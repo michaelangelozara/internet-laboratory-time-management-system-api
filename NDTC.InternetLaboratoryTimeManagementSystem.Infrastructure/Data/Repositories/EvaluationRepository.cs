@@ -79,5 +79,21 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                     e.LastModifiedAt))
                 .ToPagedResultAsync(pageNumber, pageSize);
         }
+
+        public async Task<bool> HasAnsweredToLatestEvaluationByUserIdAsync(Guid userId)
+        {
+            Guid? evalutionId = await context.Evaluations
+                .Where(e => e.Active)
+                .Select(e => e.Id)
+                .FirstOrDefaultAsync();
+
+            if (!evalutionId.HasValue)
+                return true;
+
+            return await context.Evaluations
+                .AnyAsync(e => 
+                    e.Id == evalutionId.Value && 
+                    e.AnswerEvaluations.Any(ae => ae.UserId == userId));
+        }
     }
 }

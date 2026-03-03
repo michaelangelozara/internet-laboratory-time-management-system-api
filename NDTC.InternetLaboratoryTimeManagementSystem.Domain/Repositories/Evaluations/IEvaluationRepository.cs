@@ -10,5 +10,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evalua
         Task<Evaluation?> FindByIdAsync(Guid id);
 
         Task<EvaluationResponseDTO?> FindEvaluationResponseDTOByIdAsync();
+
+        Task<bool> HasAnsweredToLatestEvaluationByUserIdAsync(Guid userId);
     }
 }
