@@ -26,5 +26,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
             return setting;
         }
+
+        public void SetIsSyncing(bool isSyncing)
+        {
+            IsSyncing = isSyncing;
+        }
     }
 }
