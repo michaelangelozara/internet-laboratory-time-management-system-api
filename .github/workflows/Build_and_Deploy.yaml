@@ -38,8 +38,8 @@ jobs:
       - name: Add .NET tools to PATH
         run: echo "${HOME}/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: Run EF Core migrations
-        run: dotnet ef database update -c AppDbContext -p ./NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure -s ./NDTC.InternetLaboratoryTimeManagementSystem.WebAPI --connection "${{ secrets.DATABASE_CONNECTION_STRING }}"
+      # - name: Run EF Core migrations
+      #   run: dotnet ef database update -c AppDbContext -p ./NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure -s ./NDTC.InternetLaboratoryTimeManagementSystem.WebAPI --connection "${{ secrets.DATABASE_CONNECTION_STRING }}"
 
       - name: Test
         run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build --verbosity normal
