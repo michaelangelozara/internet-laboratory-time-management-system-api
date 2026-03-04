@@ -11,7 +11,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Settings;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.SyncRequests;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authorization;
@@ -52,7 +52,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
 
             services.AddScoped<IRoleManager, RoleManager>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<ISettingService, SettingService>();
+            services.AddScoped<ISyncRequestService, SyncRequestService>();
 
             return services;
         }
@@ -66,7 +66,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEvaluationRepository, EvaluationRepository>();
             services.AddScoped<IAnswerEvaluationRepository, AnswerEvaluationRepository>();
-            services.AddScoped<ISettingRepository, SettingRepository>();
+            services.AddScoped<ISyncRequestRepository, SettingRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -89,7 +89,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
 
                         await SuperAdminSeeder.SeedAsync((AppDbContext)context, cancellationToken);
 
-                        await SettingSeeder.SeedAsync((AppDbContext)context, cancellationToken);
+                        await SyncRequestSeeder.SeedAsync((AppDbContext)context, cancellationToken);
                     });
             });
 

@@ -65,35 +65,38 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.ToTable("evaluations", (string)null);
                 });
 
-            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.Setting", b =>
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.SyncRequest", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
+                    b.Property<DateTime>("CompletedAt")
                         .HasColumnType("timestamptz")
-                        .HasColumnName("created_at")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnName("completed_at");
 
-                    b.Property<bool>("IsSyncing")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasDefaultValue(false)
-                        .HasColumnName("is_syncing");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("name");
 
-                    b.Property<DateTime?>("LastModifiedAt")
+                    b.Property<DateTime>("RequestedAt")
                         .HasColumnType("timestamptz")
-                        .HasColumnName("last_modified_at");
+                        .HasColumnName("requested_at");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatedAt");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-                    b.HasIndex("LastModifiedAt");
-
-                    b.ToTable("settings", (string)null);
+                    b.ToTable("sync_requests", (string)null);
                 });
 
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.User", b =>

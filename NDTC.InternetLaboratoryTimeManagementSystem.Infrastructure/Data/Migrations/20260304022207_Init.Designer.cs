@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260228135709_Init")]
+    [Migration("20260304022207_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -66,6 +66,40 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.HasIndex("UserId");
 
                     b.ToTable("evaluations", (string)null);
+                });
+
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.SyncRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CompletedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("completed_at");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("RequestedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("requested_at");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("sync_requests", (string)null);
                 });
 
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.User", b =>

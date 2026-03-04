@@ -30,7 +30,7 @@
             public const string Restart = "pc:restart";
         }
 
-        public static class Setting
+        public static class SyncRequest
         {
             public const string SyncStudentData = "setting:sync_student_data";
         }

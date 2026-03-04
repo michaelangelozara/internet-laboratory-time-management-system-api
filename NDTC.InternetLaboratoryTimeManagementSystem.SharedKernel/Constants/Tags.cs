@@ -6,6 +6,6 @@
         public const string Accounts = "Accounts";
         public const string Evaluations = "Evaluations";
         public const string PC = "PC";
-        public const string Settings = "Settings";
+        public const string SyncRequests = "SyncRequests";
     }
 }

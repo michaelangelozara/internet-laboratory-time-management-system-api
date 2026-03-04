@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Settings;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.SyncRequests;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
     internal class SettingRepository(AppDbContext context)
-        : ISettingRepository
+        : ISyncRequestRepository
     {
-        public async Task<Setting> Find()
+        public async Task<SyncRequest> FindByNameAsync(string name)
         {
-            return await context.Settings
-                .FirstOrDefaultAsync() ?? 
-                throw new ApplicationException("Setting is null. Seed it first.");
+            return await context.SyncRequests
+                .SingleAsync(sr => sr.Name == name);
         }
     }
 }
