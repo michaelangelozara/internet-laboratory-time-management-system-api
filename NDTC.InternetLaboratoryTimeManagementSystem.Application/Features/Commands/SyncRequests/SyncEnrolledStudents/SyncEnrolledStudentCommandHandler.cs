@@ -14,7 +14,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
     {
         public async Task<Result> Handle(SyncEnrolledStudentCommand request, CancellationToken cancellationToken)
         {
-            var studentSyncRequest = await syncRequestRepository.FindByNameAsync(SyncRequestNames.StudentSync);
+            var studentSyncRequest = await syncRequestRepository.FindByNameAsync(SyncNames.StudentSync);
             if (studentSyncRequest.Status == SyncRequestStatus.Running)
                 return Result.Failure(Error.Problem(
                     "StudentSync.InvalidState",

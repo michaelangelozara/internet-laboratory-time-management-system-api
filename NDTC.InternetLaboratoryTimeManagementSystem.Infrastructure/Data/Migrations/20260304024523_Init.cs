@@ -24,6 +24,21 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 });
 
             migrationBuilder.CreateTable(
+                name: "sync_locks",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    is_running = table.Column<bool>(type: "boolean", nullable: false),
+                    locked_at = table.Column<DateTime>(type: "timestamptz", nullable: false),
+                    locked_by = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sync_locks", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "sync_requests",
                 columns: table => new
                 {
@@ -247,6 +262,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 column: "account_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_sync_locks_name",
+                table: "sync_locks",
+                column: "name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_sync_requests_name",
                 table: "sync_requests",
                 column: "name",
@@ -290,6 +311,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
 
             migrationBuilder.DropTable(
                 name: "session_histories");
+
+            migrationBuilder.DropTable(
+                name: "sync_locks");
 
             migrationBuilder.DropTable(
                 name: "sync_requests");

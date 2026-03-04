@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260304022207_Init")]
+    [Migration("20260304024523_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -66,6 +66,40 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.HasIndex("UserId");
 
                     b.ToTable("evaluations", (string)null);
+                });
+
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.SyncLock", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("IsRunning")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_running");
+
+                    b.Property<DateTime>("LockedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("locked_at");
+
+                    b.Property<string>("LockedBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("locked_by");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("sync_locks", (string)null);
                 });
 
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.SyncRequest", b =>

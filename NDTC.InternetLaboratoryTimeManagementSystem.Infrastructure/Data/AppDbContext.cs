@@ -23,6 +23,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data
 
         public DbSet<SyncRequest> SyncRequests { get; private set; }
 
+        public DbSet<SyncLock> SyncLocks { get; private set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

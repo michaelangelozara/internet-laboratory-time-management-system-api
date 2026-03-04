@@ -90,6 +90,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                         await SuperAdminSeeder.SeedAsync((AppDbContext)context, cancellationToken);
 
                         await SyncRequestSeeder.SeedAsync((AppDbContext)context, cancellationToken);
+
+                        await SyncLockSeeder.SeedAsync((AppDbContext)context, cancellationToken);
                     });
             });
 

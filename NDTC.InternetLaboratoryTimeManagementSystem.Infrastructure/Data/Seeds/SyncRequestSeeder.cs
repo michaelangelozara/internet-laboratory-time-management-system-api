@@ -20,11 +20,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Seeds
             AppDbContext context,
             CancellationToken cancellationToken)
         {
-            var exists = await context.SyncRequests.AnyAsync(sr => sr.Name == SyncRequestNames.StudentSync, cancellationToken);
+            var exists = await context.SyncRequests.AnyAsync(sr => sr.Name == SyncNames.StudentSync, cancellationToken);
             if (exists)
                 return;
 
-            var syncRequest = SyncRequest.Create(SyncRequestNames.StudentSync);
+            var syncRequest = SyncRequest.Create(SyncNames.StudentSync);
             await context.SyncRequests.AddAsync(syncRequest, cancellationToken);
         }
     }
