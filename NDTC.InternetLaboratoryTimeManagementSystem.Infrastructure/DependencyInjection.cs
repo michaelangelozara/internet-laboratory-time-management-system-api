@@ -53,6 +53,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IRoleManager, RoleManager>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ISyncRequestService, SyncRequestService>();
+            services.AddScoped<ISyncLockService, SyncLockService>();
+
+            // thirt party api
+            services.AddScoped<IStudentClientApiService, StudentClientApiService>();
+
 
             return services;
         }
@@ -178,6 +183,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
 
                 // runs every 5 seconds
                 q.AddScheduledJob<DurationTerminationProcessor>(nameof(DurationTerminationProcessor), "0/5 * * * * ?");
+
+                // runs every second
+                q.AddScheduledJob<SyncEnrolledStudentsBackgroundJob>(nameof(SyncEnrolledStudentsBackgroundJob), "0/1 * * * * ?");
+
             });
 
             services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);

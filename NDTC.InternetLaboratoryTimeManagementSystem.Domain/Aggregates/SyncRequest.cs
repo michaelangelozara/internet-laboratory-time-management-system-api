@@ -39,11 +39,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
             RequestedAt = DateTime.UtcNow;
         }
 
-        public void MarkAsCompleted()
-        {
-            CompletedAt = DateTime.UtcNow;
-        }
-
         public void SetStatus(SyncRequestStatus status)
         {
             Status = status;

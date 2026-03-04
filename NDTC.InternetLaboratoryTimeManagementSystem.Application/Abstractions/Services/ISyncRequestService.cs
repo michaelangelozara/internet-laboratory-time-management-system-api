@@ -5,5 +5,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.S
     public interface ISyncRequestService
     {
         Task<SyncRequest> GetAsync(string name);
+
+        Task MarkAsRunningAsync(string name);
+
+        Task MarkAsCompletedAsync(string name);
     }
 }

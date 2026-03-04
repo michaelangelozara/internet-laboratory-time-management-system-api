@@ -35,6 +35,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI
         private static IServiceCollection AddRealtimeServices(this IServiceCollection services)
         {
             services.AddScoped<ISessionHubService, SessionHubService>();
+            services.AddScoped<ISyncEnrolledStudentService, SyncEnrolledStudentService>();
 
             return services;
         }
