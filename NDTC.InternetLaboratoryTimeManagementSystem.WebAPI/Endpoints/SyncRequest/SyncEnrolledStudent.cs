@@ -10,7 +10,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.SyncReque
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapPost("/settings/sync-enrolled-students", async (
+            app.MapPost("/sync-requests/enrolled-students", async (
                 ISender sender) =>
             {
                 var command = new SyncEnrolledStudentCommand();

@@ -36,7 +36,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
             string hubs = "/api/v1/hubs";
 
             app.MapHub<SessionHub>($"{hubs}/session");
-            app.MapHub<SyncEnrolledStudentHub>($"{hubs}/students/sync");
+            app.MapHub<SyncEnrolledStudentHub>($"{hubs}/sync");
         }
     }
 }
