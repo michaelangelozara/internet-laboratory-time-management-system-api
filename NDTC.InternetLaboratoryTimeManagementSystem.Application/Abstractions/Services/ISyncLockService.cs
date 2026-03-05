@@ -5,5 +5,7 @@
         Task<bool> TryAcquireAsync(string name, string instanceId);
 
         Task ReleaseAsync(string name, string instanceId);
+
+        Task StopLockingAsync();
     }
 }

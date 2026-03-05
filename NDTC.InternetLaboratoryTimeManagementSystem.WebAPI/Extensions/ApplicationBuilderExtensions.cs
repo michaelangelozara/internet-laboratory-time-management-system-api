@@ -38,5 +38,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
             app.MapHub<SessionHub>($"{hubs}/session");
             app.MapHub<SyncEnrolledStudentHub>($"{hubs}/sync");
         }
+        
+        internal static async Task UseStopSyncingAndLocking(this WebApplication app)
+        {
+            using var scope = app.Services.CreateAsyncScope();
+
+            var syncRequestService = scope.ServiceProvider.GetRequiredService<ISyncRequestService>();
+            await syncRequestService.StopSyncingAsync();
+
+            var syncLockService = scope.ServiceProvider.GetRequiredService<ISyncLockService>();
+            await syncLockService.StopLockingAsync();
+        }
     }
 }

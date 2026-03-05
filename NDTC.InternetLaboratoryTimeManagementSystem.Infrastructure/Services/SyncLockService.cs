@@ -17,6 +17,15 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
                         .SetProperty(sl => sl.LockedBy, string.Empty));
         }
 
+        public async Task StopLockingAsync()
+        {
+            await context.SyncLocks
+                .ExecuteUpdateAsync(setter =>
+                    setter
+                        .SetProperty(sl => sl.IsRunning, false)
+                        .SetProperty(sl => sl.LockedBy, string.Empty));
+        }
+
         public async Task<bool> TryAcquireAsync(string name, string instanceId)
         {
             int affectedRow = await context.SyncLocks

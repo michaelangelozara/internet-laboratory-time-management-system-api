@@ -9,5 +9,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.S
         Task MarkAsRunningAsync(string name);
 
         Task MarkAsCompletedAsync(string name);
+
+        Task StopSyncingAsync();
     }
 }

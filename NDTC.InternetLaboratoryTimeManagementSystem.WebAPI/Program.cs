@@ -28,6 +28,8 @@ await app.UseMigration();
 
 await app.UseLogoutAllAccounts();
 
+await app.UseStopSyncingAndLocking();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

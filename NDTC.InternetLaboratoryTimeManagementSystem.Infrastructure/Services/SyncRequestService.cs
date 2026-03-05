@@ -25,6 +25,15 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             await UpdateStatusAsync(name, SyncRequestStatus.Running);
         }
 
+        public async Task StopSyncingAsync()
+        {
+            await context.SyncRequests
+                .ExecuteUpdateAsync(setter =>
+                    setter
+                        .SetProperty(sr => sr.Status, SyncRequestStatus.Completed)
+                        .SetProperty(sr => sr.CompletedAt, DateTime.UtcNow));
+        }
+
         private async Task UpdateStatusAsync(string name, SyncRequestStatus status)
         {
             await context.SyncRequests
