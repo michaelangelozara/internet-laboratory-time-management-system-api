@@ -27,7 +27,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
                 await unitOfWork.CommitAsync(cancellationToken);
 
                 // publish new duration
-                await sessionHubService.PublishUpdatedSession(account.UserId, account.AvailableDuration);
+                await sessionHubService.PublishUpdatedSession(account.UserId, account.AvailableDurationTimeSpan);
 
                 return Result.Success(account.Id);
             }

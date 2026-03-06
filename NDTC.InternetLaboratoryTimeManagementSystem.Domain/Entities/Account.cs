@@ -10,12 +10,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
     {
         public string RFID { get; private set; } = string.Empty;
 
-        public DateTime? LastLoginAt { get; private set; }
+        public DateTime LastLoginAt { get; private set; }
 
         [NotMapped]
-        public TimeSpan RemainingDuration => (AvailableDuration - (DateTime.UtcNow - LastLoginAt)) ?? TimeSpan.Zero;
-        
-        public TimeSpan AvailableDuration { get; private set; }
+        public TimeSpan RemainingDurationTimeSpan => (new TimeSpan(AvailableDuration) - (DateTime.UtcNow - LastLoginAt));
+
+        [NotMapped]
+        public TimeSpan AvailableDurationTimeSpan => new(AvailableDuration);
+
+        // This AvailableDuration stores TimeSpan's Ticks
+        public long AvailableDuration { get; private set; }
 
         public bool IsLoggedIn { get; private set; } = false;
 
@@ -52,13 +56,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
                 return;
 
             // persist a new session history
-            // adding session history must only work if the account is logged in
-            TimeSpan consumedTime = AvailableDuration - RemainingDuration;
+            long consumedTime = AvailableDuration - RemainingDurationTimeSpan.Ticks;
             var sessionHistory = SessionHistory.Create(consumedTime);
             SessionHistories.Add(sessionHistory);
 
             // re-set the total duration
-            AvailableDuration = (RemainingDuration < TimeSpan.Zero) ? TimeSpan.Zero : RemainingDuration;
+            AvailableDuration = (RemainingDurationTimeSpan < TimeSpan.Zero) ? 0 : RemainingDurationTimeSpan.Ticks;
 
             IsLoggedIn = false;
         }
@@ -81,7 +84,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             if (!isValid)
                 throw new ApplicationException("Duration cannot be updated. Invalid duration format.");
 
-            AvailableDuration = timeSpan;
+            AvailableDuration = timeSpan.Ticks;
         }
     }
 }

@@ -93,8 +93,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     rfid = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    last_login_at = table.Column<DateTime>(type: "timestamptz", nullable: true),
-                    available_duration = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    last_login_at = table.Column<DateTime>(type: "timestamptz", nullable: false),
+                    available_duration = table.Column<long>(type: "bigint", nullable: false),
                     is_logged_in = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -160,7 +160,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    consumed_time = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    consumed_time = table.Column<long>(type: "bigint", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamptz", nullable: false, defaultValueSql: "now()"),
                     account_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },

@@ -5,7 +5,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
     public sealed class SessionHistory 
         : Entity
     {
-        public TimeSpan ConsumedTime { get; private set; }
+        public long ConsumedTime { get; private set; }
 
         public DateTime CreatedAt { get; } = DateTime.UtcNow;
 
@@ -18,7 +18,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             
         }
 
-        public static SessionHistory Create(TimeSpan consumedTime)
+        public static SessionHistory Create(long consumedTime)
         {
             var sessionHistory = new SessionHistory
             {

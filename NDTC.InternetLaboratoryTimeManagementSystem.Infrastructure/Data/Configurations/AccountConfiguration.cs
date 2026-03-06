@@ -24,11 +24,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(a => a.LastLoginAt)
                 .HasColumnName("last_login_at")
                 .HasColumnType("timestamptz")
-                .IsRequired(false);
+                .IsRequired();
 
             builder.Property(a => a.AvailableDuration)
                 .HasColumnName("available_duration")
-                .HasColumnType("interval")
+                .HasColumnType("bigint")
                 .IsRequired();
 
             builder.Property(a => a.IsLoggedIn)

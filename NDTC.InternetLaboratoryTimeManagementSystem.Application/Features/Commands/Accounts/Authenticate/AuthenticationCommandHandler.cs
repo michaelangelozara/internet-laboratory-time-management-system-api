@@ -38,7 +38,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             if (roles.Contains(Roles.Admin) || roles.Contains(Roles.SuperAdmin))
                 return Result.Success(new AuthenticationResponseDTO(adminToken, null));
 
-            if (account.AvailableDuration <= TimeSpan.Zero)
+            if (account.AvailableDurationTimeSpan <= TimeSpan.Zero)
                 return Result.Failure<AuthenticationResponseDTO>(Error.NotFound("Account.Invalid", "You already consumed your time."));
 
             account.MarkAsLoggedIn();
@@ -48,9 +48,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
             var studentToken = tokenProvider.Create(user, roles, answered);
 
             // publish new openned sesison
-            await sessionHubService.PublishNewSessionOf(user.Id, user.SchoolId, account.AvailableDuration);
+            await sessionHubService.PublishNewSessionOf(user.Id, user.SchoolId, account.AvailableDurationTimeSpan);
             
-            return Result.Success(new AuthenticationResponseDTO(studentToken, account.AvailableDuration));
+            return Result.Success(new AuthenticationResponseDTO(studentToken, account.AvailableDurationTimeSpan));
         }
     }
 }

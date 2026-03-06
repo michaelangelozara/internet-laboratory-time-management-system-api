@@ -33,7 +33,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
                 var accounts = await accountRepository.FindLoggedInAccountsByCountAsync(20);
                 foreach(var account in accounts)
                 {
-                    if (account.RemainingDuration <= TimeSpan.Zero)
+                    if (account.RemainingDurationTimeSpan <= TimeSpan.Zero)
                     {
                         account.LogOut();
                         await sessionHubService.PublishTerminationTo(account.UserId);

@@ -48,13 +48,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
 
         public async Task SetIsLoggedInToFalseAndReComputeAvailableDurationAsync()
         {
+            var now = dateTimeProvider.UtcNow;
+
             await context.Accounts
                 .Where(a => a.IsLoggedIn)
                 .ExecuteUpdateAsync(setter =>
                     setter
                         .SetProperty(a => a.IsLoggedIn, false)
                         .SetProperty(a => a.AvailableDuration, a =>
-                            a.AvailableDuration - (dateTimeProvider.UtcNow - a.LastLoginAt)));
+                            a.AvailableDuration -
+                            (long)((now - a.LastLoginAt).TotalMilliseconds * TimeSpan.TicksPerMillisecond)));
         }
 
         public async Task<Account?> FindByUserIdWithUserAsNoTrackingAsync(Guid userId)
@@ -90,7 +93,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                             a.UserId,
                             a.User!.SchoolId,
                             a.IsLoggedIn,
-                            (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero))
+                            a.AvailableDuration,
+                            a.LastLoginAt))
                             .ToPagedResultAsync(pageNumber, pageSize);
                 }
                 else
@@ -101,7 +105,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                             a.UserId,
                             a.User!.SchoolId,
                             a.IsLoggedIn,
-                            a.AvailableDuration))
+                            a.AvailableDuration,
+                            a.LastLoginAt))
                             .ToPagedResultAsync(pageNumber, pageSize);
                 }
             }
@@ -111,7 +116,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 a.UserId,
                 a.User!.SchoolId,
                 a.IsLoggedIn,
-                a.IsLoggedIn ? (a.AvailableDuration - (DateTime.UtcNow - a.LastLoginAt)) ?? TimeSpan.Zero : a.AvailableDuration))
+                a.AvailableDuration,
+                a.LastLoginAt))
                 .ToPagedResultAsync(pageNumber, pageSize);
         }
 

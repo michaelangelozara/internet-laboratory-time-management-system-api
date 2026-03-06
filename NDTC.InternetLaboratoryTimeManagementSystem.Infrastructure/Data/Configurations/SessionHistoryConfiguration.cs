@@ -15,7 +15,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
 
             builder.Property(sh => sh.ConsumedTime)
                 .HasColumnName("consumed_time")
-                .HasColumnType("interval")
+                .HasColumnType("bigint")
                 .IsRequired();
 
             builder.Property(sh => sh.CreatedAt)

@@ -2,6 +2,6 @@
 {
     public static class Duration
     {
-        public static TimeSpan DefaultAccountDuration => TimeSpan.FromHours(2);
+        public static long DefaultAccountDuration => TimeSpan.FromHours(2).Ticks;
     }
 }

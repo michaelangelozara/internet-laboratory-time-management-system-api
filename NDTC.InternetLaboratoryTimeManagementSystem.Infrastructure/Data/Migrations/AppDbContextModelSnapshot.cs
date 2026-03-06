@@ -173,8 +173,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<TimeSpan>("AvailableDuration")
-                        .HasColumnType("interval")
+                    b.Property<long>("AvailableDuration")
+                        .HasColumnType("bigint")
                         .HasColumnName("available_duration");
 
                     b.Property<bool>("IsLoggedIn")
@@ -183,7 +183,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasDefaultValue(false)
                         .HasColumnName("is_logged_in");
 
-                    b.Property<DateTime?>("LastLoginAt")
+                    b.Property<DateTime>("LastLoginAt")
                         .HasColumnType("timestamptz")
                         .HasColumnName("last_login_at");
 
@@ -313,8 +313,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnType("uuid")
                         .HasColumnName("account_id");
 
-                    b.Property<TimeSpan>("ConsumedTime")
-                        .HasColumnType("interval")
+                    b.Property<long>("ConsumedTime")
+                        .HasColumnType("bigint")
                         .HasColumnName("consumed_time");
 
                     b.Property<DateTime>("CreatedAt")
