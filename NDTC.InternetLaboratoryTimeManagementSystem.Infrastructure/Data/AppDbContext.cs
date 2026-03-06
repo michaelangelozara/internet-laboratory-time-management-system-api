@@ -13,6 +13,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data
 
         public DbSet<Account> Accounts { get; private set; }
 
+        public DbSet<SessionHistory> SessionHistories { get; private set; }
+
         public DbSet<Role> Roles { get; private set; }
 
         public DbSet<RoleClaim> RoleClaims { get; private set; }

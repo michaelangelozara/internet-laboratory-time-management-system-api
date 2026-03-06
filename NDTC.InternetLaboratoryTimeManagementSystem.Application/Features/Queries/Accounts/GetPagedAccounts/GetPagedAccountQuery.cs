@@ -2,7 +2,7 @@
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
-namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts.GetPagedAccounts
 {
     public sealed record GetPagedAccountQuery(int PageNumber, int PageSize, bool? Active) 
         : IRequest<Result<PagedResult<AccountResponseDTO>>>;

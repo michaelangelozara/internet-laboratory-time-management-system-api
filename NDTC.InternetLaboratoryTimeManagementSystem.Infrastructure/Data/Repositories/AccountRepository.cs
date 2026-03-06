@@ -132,5 +132,21 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             return await context.Accounts
                 .AnyAsync(a => a.UserId == userId);
         }
+
+        public async Task<PagedResult<SessionHistoryResponseDTO>> GetPagedAsync(int pageNumber, int pageSize)
+        {
+            return await context.SessionHistories
+                .GroupBy(sh => new { sh.AccountId, sh.Account.User.SchoolId })
+                .Select(group => new
+                {
+                    group.Key.SchoolId,
+                    ConsumedTime = group.Sum(x => x.ConsumedTime)
+                })
+                .OrderBy(x => x.SchoolId)
+                .Select(x => new SessionHistoryResponseDTO(
+                    x.SchoolId,
+                    x.ConsumedTime))
+                .ToPagedResultAsync(pageNumber, pageSize);
+        }
     }
 }

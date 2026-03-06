@@ -1,13 +1,14 @@
 ﻿using MediatR;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts.GetPagedAccounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel.Constants;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Infrastructure;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
 {
-    public class GetPagination : IEndpoint
+    public class GetAccountPagination : IEndpoint
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
@@ -24,7 +25,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
             })
                 .HasPermission(Permissions.Account.Read)
                 .WithTags(Tags.Accounts)
-                .Produces<IEnumerable<AccountResponseDTO>>(StatusCodes.Status200OK)
+                .Produces<PagedResult<AccountResponseDTO>>(StatusCodes.Status200OK)
                 .WithDescription("This is used to fetch the student accounts pagination. The active is optional, if it is null, this returns all active and inactive accounts. If it is true returns active accounts only and vice versa.");
         }
     }

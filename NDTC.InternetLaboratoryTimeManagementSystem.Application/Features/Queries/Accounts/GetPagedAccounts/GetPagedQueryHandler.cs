@@ -3,7 +3,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
-namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts.GetPagedAccounts
 {
     internal class GetPagedQueryHandler(IAccountRepository accountRepository)
         : IRequestHandler<GetPagedAccountQuery, Result<PagedResult<AccountResponseDTO>>>

@@ -3,7 +3,8 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts
 {
-    public interface IAccountRepository : IPagedRepository<AccountResponseDTO, bool?>
+    public interface IAccountRepository 
+        : IPagedRepository<AccountResponseDTO, bool?>, IPagedRepository<SessionHistoryResponseDTO>
     {
         Task<Account?> FindByRFIDWithUserAsync(string rfid);
 
