@@ -27,6 +27,7 @@
 
         public static class PC
         {
+            public const string Read = "pc:read";
             public const string Restart = "pc:restart";
         }
 

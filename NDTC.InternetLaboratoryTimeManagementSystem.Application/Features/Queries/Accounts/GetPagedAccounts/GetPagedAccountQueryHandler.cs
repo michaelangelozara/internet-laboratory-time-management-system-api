@@ -5,7 +5,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Accounts.GetPagedAccounts
 {
-    internal class GetPagedQueryHandler(IAccountRepository accountRepository)
+    internal class GetPagedAccountQueryHandler(IAccountRepository accountRepository)
         : IRequestHandler<GetPagedAccountQuery, Result<PagedResult<AccountResponseDTO>>>
     {
         public async Task<Result<PagedResult<AccountResponseDTO>>> Handle(GetPagedAccountQuery request, CancellationToken cancellationToken)
