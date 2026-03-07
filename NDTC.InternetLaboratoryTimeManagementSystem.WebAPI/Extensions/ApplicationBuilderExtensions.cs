@@ -37,6 +37,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
 
             app.MapHub<SessionHub>($"{hubs}/session");
             app.MapHub<SyncEnrolledStudentHub>($"{hubs}/sync");
+            app.MapHub<ClientDeviceHub>($"{hubs}/client-device");
         }
         
         internal static async Task UseStopSyncingAndLocking(this WebApplication app)

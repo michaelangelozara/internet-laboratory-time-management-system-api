@@ -4,7 +4,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.SyncReques
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
-    internal class SettingRepository(AppDbContext context)
+    internal class SyncRequestRepository(AppDbContext context)
         : ISyncRequestRepository
     {
         public async Task<SyncRequest> FindByNameAsync(string name)

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
@@ -54,6 +55,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ISyncRequestService, SyncRequestService>();
             services.AddScoped<ISyncLockService, SyncLockService>();
+            services.AddScoped<IClientDeviceService, ClientDeviceService>();
 
             // thirt party api
             services.AddScoped<IStudentClientApiService, StudentClientApiService>();
@@ -71,7 +73,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IEvaluationRepository, EvaluationRepository>();
             services.AddScoped<IAnswerEvaluationRepository, AnswerEvaluationRepository>();
-            services.AddScoped<ISyncRequestRepository, SettingRepository>();
+            services.AddScoped<ISyncRequestRepository, SyncRequestRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
