@@ -24,7 +24,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
             })
                 .HasPermission(Permissions.Evaluation.Update)
                 .WithTags(Tags.Evaluations)
-                .WithDescription("This is used to update a the evaluation.")
+                .WithDescription("This endpoint is used to update an evaluation identified by the specified ID.")
                 .Produces(StatusCodes.Status200OK);
         }
     }

@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
             })
                 .HasPermission(Permissions.Account.UpdateDuration)
                 .WithTags(Tags.Accounts)
-                .WithDescription("This is used to update the time/duration of the particular user.")
+                .WithDescription("This endpoint is used to update the time or duration assigned to a specific user.")
                 .Produces(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound);
         }

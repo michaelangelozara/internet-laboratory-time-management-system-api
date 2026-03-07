@@ -19,7 +19,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Authentic
                 return result.Match(() => Results.Ok(), CustomResults.Problem);
             })
                 .WithTags(Tags.Accounts)
-                .WithDescription("This needs authenticated user. Make sure to embed the access token before calling this endpoint")
+                .WithDescription("This endpoint requires an authenticated user. Ensure that the access token is included in the request before calling this endpoint.")
                 .Produces(StatusCodes.Status200OK);
         }
     }

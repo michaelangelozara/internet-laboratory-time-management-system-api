@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Admins
             })
                 .WithTags(Tags.Users)
                 .HasPermission(Permissions.User.Create)
-                .WithDescription("This is used to create a user with an admin role.")
+                .WithDescription("This endpoint is used to create a user with an admin role and can only be accessed by the superadmin or the system account.")
                 .Produces(StatusCodes.Status201Created)
                 .Produces(StatusCodes.Status409Conflict);
         }

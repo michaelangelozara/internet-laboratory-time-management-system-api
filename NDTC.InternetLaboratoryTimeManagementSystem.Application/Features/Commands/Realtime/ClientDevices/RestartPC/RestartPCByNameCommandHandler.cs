@@ -3,7 +3,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realt
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.ClientDevices;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
-namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Realtime.RestartPC
+namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Commands.Realtime.ClientDevices.RestartPC
 {
     internal class RestartPCByNameCommandHandler(
         IClientDeviceRepository clientDeviceRepository,

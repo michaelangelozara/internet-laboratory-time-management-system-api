@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.AnswerEva
                 return result.Match((id) => Results.Created($"/api/v1/evaluations/answers/{id}", id), CustomResults.Problem);
             })
                 .WithTags(Tags.Evaluations)
-                .WithDescription("This is used to create an answer evaluation. This is basically where student's answers go.")
+                .WithDescription("This endpoint is used to create an answer evaluation, which records the student's submitted answers.")
                 .Produces(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound)
                 .Produces(StatusCodes.Status400BadRequest);

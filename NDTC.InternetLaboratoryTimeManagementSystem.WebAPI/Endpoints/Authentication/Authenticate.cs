@@ -26,7 +26,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Authentic
             })
                 .AllowAnonymous()
                 .WithTags(Tags.Accounts)
-                .WithDescription("Returns access token with optional duration property. If the role is admin then the duration will be null. If the role is student the duration will have a value")
+                .WithDescription("Returns an access token with an optional duration property. If the authenticated user's role is admin, the duration value will be null. If the role is student, the duration property will contain a value indicating the account's validity duration.")
                 .Produces<AuthenticationResponseDTO>(StatusCodes.Status200OK)
                 .Produces<Error>(StatusCodes.Status401Unauthorized);
         }

@@ -25,7 +25,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
                 .HasPermission(Permissions.Account.Read)
                 .WithTags(Tags.Accounts)
                 .Produces<PagedResult<SessionHistoryResponseDTO>>(StatusCodes.Status200OK)
-                .WithDescription("This is used to fetch the student session history pagination.");
+                .WithDescription("Retrieves a paginated list of student session history, including each student and their accumulated consumed time.");
         }
     }
 }

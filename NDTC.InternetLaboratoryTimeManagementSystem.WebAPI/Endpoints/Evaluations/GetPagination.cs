@@ -24,7 +24,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
             })
                 .HasPermission(Permissions.Evaluation.Read)
                 .WithTags(Tags.Evaluations)
-                .WithDescription("Evaluation's pagination. This can only be used by the super admin and admin roles.")
+                .WithDescription("Retrieves a paginated list of evaluations. This endpoint can only be accessed by users with superadmin or admin roles.")
                 .Produces<PagedResult<EvaluationResponseDTO>>(StatusCodes.Status200OK);
         }
     }

@@ -19,7 +19,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
                 return result.Match(Results.Ok, CustomResults.Problem);
             })
                 .WithTags(Tags.Evaluations)
-                .WithDescription("This is used for fetching the complete details of the latest evaluation.")
+                .WithDescription("This endpoint is used to fetch the full details of the latest evaluation.")
                 .Produces<EvaluationResponseDTO>(StatusCodes.Status200OK)
                 .Produces(StatusCodes.Status404NotFound);
         }

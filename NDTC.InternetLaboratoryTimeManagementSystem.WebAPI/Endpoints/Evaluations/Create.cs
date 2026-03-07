@@ -23,7 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Evaluatio
             })
                 .HasPermission(Permissions.Evaluation.Create)
                 .WithTags(Tags.Evaluations)
-                .WithDescription("This is used to create an evaluation.")
+                .WithDescription("This endpoint is used to create a new evaluation.")
                 .Produces(StatusCodes.Status201Created);
         }
     }

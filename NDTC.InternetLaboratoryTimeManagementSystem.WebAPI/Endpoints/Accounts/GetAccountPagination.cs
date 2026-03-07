@@ -26,7 +26,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Accounts
                 .HasPermission(Permissions.Account.Read)
                 .WithTags(Tags.Accounts)
                 .Produces<PagedResult<AccountResponseDTO>>(StatusCodes.Status200OK)
-                .WithDescription("This is used to fetch the student accounts pagination. The active is optional, if it is null, this returns all active and inactive accounts. If it is true returns active accounts only and vice versa.");
+                .WithDescription("Retrieves a paginated list of student accounts with an optional filter for account status. If the active parameter is true, only active accounts are returned; if false, only inactive accounts are returned; if null or omitted, both active and inactive accounts are included.");
         }
     }
 }

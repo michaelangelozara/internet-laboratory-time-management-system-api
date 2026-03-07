@@ -20,7 +20,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.SyncReque
             })
                 .HasPermission(Permissions.SyncRequest.SyncStudentData)
                 .WithTags(Tags.SyncRequests)
-                .WithDescription("This is used to perform syncing enrolled student. This can only be used with super admin and admin roles.")
+                .WithDescription("This endpoint is used to sync enrolled students and can only be accessed by users with superadmin or admin roles")
                 .Produces(StatusCodes.Status200OK);
         }
     }
