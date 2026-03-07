@@ -3,7 +3,7 @@ using Quartz;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.BackgroundJobs
 {
-    internal class DurationTerminationProcessor(IAccountService accountService) : IJob
+    internal class SessionTerminationProcessor(IAccountService accountService) : IJob
     {
         public async Task Execute(IJobExecutionContext context)
         {

@@ -185,7 +185,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                 q.AddScheduledJob<DurationProcessorJob>(nameof(DurationProcessorJob), "0 0/10 * * * ?");
 
                 // runs every 5 seconds
-                q.AddScheduledJob<DurationTerminationProcessor>(nameof(DurationTerminationProcessor), "0/5 * * * * ?");
+                q.AddScheduledJob<SessionTerminationProcessor>(nameof(SessionTerminationProcessor), "0/5 * * * * ?");
 
                 // runs every second
                 q.AddScheduledJob<SyncEnrolledStudentsBackgroundJob>(nameof(SyncEnrolledStudentsBackgroundJob), "0/1 * * * * ?");
