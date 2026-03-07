@@ -1,4 +1,4 @@
-﻿namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services
+﻿namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services
 {
     public interface IClientDeviceService
     {

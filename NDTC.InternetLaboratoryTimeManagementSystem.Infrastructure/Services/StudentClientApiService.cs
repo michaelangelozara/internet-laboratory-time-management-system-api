@@ -11,7 +11,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
         ISyncLockService syncLockService,
         ISyncRequestService syncRequestService,
         ILogger<StudentClientApiService> logger,
-        ISyncEnrolledStudentService syncEnrolledStudentService)
+        ISyncEnrolledStudentHubService syncEnrolledStudentService)
         : IStudentClientApiService
     {
         public async Task TryToSyncEnrolledStudents()

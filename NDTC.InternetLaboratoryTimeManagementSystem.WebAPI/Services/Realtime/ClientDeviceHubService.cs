@@ -5,13 +5,12 @@ using NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Services.Realtime
 {
-    public class SyncEnrolledStudentService(
-        IHubContext<SyncEnrolledStudentHub, ISyncEnrolledStudentHubClient> hubContext)
-        : ISyncEnrolledStudentService
+    public class ClientDeviceHubService(IHubContext<ClientDeviceHub, IClientDeviceHubClient> hubContext)
+        : IClientDeviceHubService
     {
-        public async Task PublishEnrolledStudentSyncingProgress(string processedPercentage)
+        public async Task PublishRestartSignalTo(string connectionId)
         {
-            await hubContext.Clients.All.SyncingProgress(processedPercentage);
+            await hubContext.Clients.Client(connectionId).Restart();
         }
     }
 }

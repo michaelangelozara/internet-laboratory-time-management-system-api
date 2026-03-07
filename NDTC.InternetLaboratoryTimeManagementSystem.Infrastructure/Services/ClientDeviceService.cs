@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
 

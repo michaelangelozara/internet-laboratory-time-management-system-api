@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Authentication;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.ClientDevices;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.SyncRequests;
@@ -74,6 +74,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IEvaluationRepository, EvaluationRepository>();
             services.AddScoped<IAnswerEvaluationRepository, AnswerEvaluationRepository>();
             services.AddScoped<ISyncRequestRepository, SyncRequestRepository>();
+            services.AddScoped<IClientDeviceRepository, ClientDeviceRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

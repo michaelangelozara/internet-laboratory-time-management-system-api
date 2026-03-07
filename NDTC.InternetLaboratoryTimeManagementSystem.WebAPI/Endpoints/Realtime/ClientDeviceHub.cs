@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.HubClients;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Realtime.Services;
+using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Realtime
 {

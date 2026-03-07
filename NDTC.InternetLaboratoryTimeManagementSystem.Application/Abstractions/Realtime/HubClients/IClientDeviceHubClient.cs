@@ -2,6 +2,6 @@
 {
     public interface IClientDeviceHubClient
     {
-        Task Shutdown();
+        Task Restart();
     }
 }

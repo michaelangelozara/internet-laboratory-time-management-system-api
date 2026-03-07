@@ -11,7 +11,5 @@
         Task PublishTerminationTo(Guid userId);
 
         Task PublishTerminatedUserId(Guid userId);
-
-        Task PublishRestartSignalTo(Guid userId);
     }
 }

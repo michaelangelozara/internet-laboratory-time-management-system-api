@@ -8,7 +8,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.ShutdownS
 {
     public class RestartSignal : IEndpoint
     {
-        public sealed record RestartSignalRequest(Guid UserId);
+        public sealed record RestartSignalRequest(string DeviceName);
 
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
@@ -16,7 +16,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.ShutdownS
                 ISender sender,
                 RestartSignalRequest request) =>
             {
-                var command = new RestartPCByUserIdCommand(request.UserId);
+                var command = new RestartPCByNameCommand(request.DeviceName);
                 var result = await sender.Send(command);
 
                 return result.Match(() => Results.Ok(), CustomResults.Problem);
