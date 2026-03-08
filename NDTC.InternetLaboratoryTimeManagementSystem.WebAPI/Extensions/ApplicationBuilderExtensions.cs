@@ -50,5 +50,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Extensions
             var syncLockService = scope.ServiceProvider.GetRequiredService<ISyncLockService>();
             await syncLockService.StopLockingAsync();
         }
+
+        internal static async Task UseRemoveAllRegisteredDevices(this WebApplication app)
+        {
+            using var scope = app.Services.CreateAsyncScope();
+            var clientDeviceService = scope.ServiceProvider.GetRequiredService<IClientDeviceService>();
+            await clientDeviceService.RemoveAllRegisteredDevices();
+        }
     }
 }

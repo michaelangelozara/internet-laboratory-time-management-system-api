@@ -30,6 +30,8 @@ await app.UseLogoutAllAccounts();
 
 await app.UseStopSyncingAndLocking();
 
+await app.UseRemoveAllRegisteredDevices();
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

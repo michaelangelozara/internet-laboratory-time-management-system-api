@@ -18,6 +18,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             await unitOfWork.SaveChangesAsync();
         }
 
+        public async Task RemoveAllRegisteredDevices()
+        {
+            await clientDeviceRepository.RemoveAllRegisteredDevicesAsync();
+        }
+
         public async Task UnregisterDevice(string connectionId)
         {
             var clientDevice = await clientDeviceRepository.FindByConnectionIdAsync(connectionId);

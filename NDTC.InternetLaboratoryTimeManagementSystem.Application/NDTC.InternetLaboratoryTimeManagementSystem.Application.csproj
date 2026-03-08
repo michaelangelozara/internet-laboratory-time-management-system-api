@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Abstractions\Repositories\**" />
     <Compile Remove="StudentApiClients\**" />
+    <EmbeddedResource Remove="Abstractions\Repositories\**" />
     <EmbeddedResource Remove="StudentApiClients\**" />
+    <None Remove="Abstractions\Repositories\**" />
     <None Remove="StudentApiClients\**" />
   </ItemGroup>
 
@@ -18,10 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NDTC.InternetLaboratoryTimeManagementSystem.Domain\NDTC.InternetLaboratoryTimeManagementSystem.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Abstractions\Repositories\" />
   </ItemGroup>
 
 </Project>

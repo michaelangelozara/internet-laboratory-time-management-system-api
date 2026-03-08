@@ -45,5 +45,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             return await context.ClientDevices
                 .FirstOrDefaultAsync(cd => cd.ConnectionId == connectionId);
         }
+
+        public async Task RemoveAllRegisteredDevicesAsync()
+        {
+            await context.ClientDevices
+                .ExecuteDeleteAsync();
+        }
     }
 }

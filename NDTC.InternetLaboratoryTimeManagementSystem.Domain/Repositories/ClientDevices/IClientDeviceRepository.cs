@@ -9,5 +9,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Client
         Task<ClientDevice?> FindByNameAsNoTrackingAsync(string deviceName);
 
         Task<ClientDevice?> FindByConnectionIdAsync(string connectionId);
+
+        Task RemoveAllRegisteredDevicesAsync();
     }
 }
