@@ -12,7 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Comma
     {
         public async Task<Result> Handle(RestartPCByNameCommand request, CancellationToken cancellationToken)
         {
-            var clientDevice = await clientDeviceRepository.FindByName(request.DeviceName);
+            var clientDevice = await clientDeviceRepository.FindByNameAsNoTrackingAsync(request.DeviceName);
             if(clientDevice is null)
                 return Result.Success();
 

@@ -1,33 +1,33 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Application.Abstractions.Services;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
-using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.ClientDevices;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
 {
     internal class ClientDeviceService(
-        AppDbContext context)
+        IClientDeviceRepository clientDeviceRepository,
+        IUnitOfWork unitOfWork)
         : IClientDeviceService
     {
         public async Task RegisterDevice(string name, string connectionId)
         {
             var clientDevice = ClientDevice.Create(name, connectionId);
-            await context.ClientDevices.AddAsync(clientDevice);
+            await clientDeviceRepository.AddAsync(clientDevice);
 
-            await context.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
         }
 
         public async Task UnregisterDevice(string connectionId)
         {
-            var clientDevice = await context.ClientDevices
-                .FirstOrDefaultAsync(cd => cd.ConnectionId == connectionId);
+            var clientDevice = await clientDeviceRepository.FindByConnectionIdAsync(connectionId);
             
             if (clientDevice is null)
                 return;
 
-            context.ClientDevices.Remove(clientDevice);
+            clientDeviceRepository.Remove(clientDevice);
 
-            await context.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

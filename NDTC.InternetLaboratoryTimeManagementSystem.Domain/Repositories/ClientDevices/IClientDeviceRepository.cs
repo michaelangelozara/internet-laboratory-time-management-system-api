@@ -3,8 +3,11 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.ClientDevices;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.ClientDevices
 {
-    public interface IClientDeviceRepository : IPagedRepository<ClientDeviceResponseDTO>
+    public interface IClientDeviceRepository 
+        : IBaseRepository<ClientDevice>, IPagedRepository<ClientDeviceResponseDTO>
     {
-        Task<ClientDevice?> FindByName(string deviceName);
+        Task<ClientDevice?> FindByNameAsNoTrackingAsync(string deviceName);
+
+        Task<ClientDevice?> FindByConnectionIdAsync(string connectionId);
     }
 }

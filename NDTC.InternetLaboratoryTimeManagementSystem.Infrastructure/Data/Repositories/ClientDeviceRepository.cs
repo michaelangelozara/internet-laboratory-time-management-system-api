@@ -8,14 +8,15 @@ using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Repositories
 {
     internal class ClientDeviceRepository(AppDbContext context)
-        : IClientDeviceRepository
+        : BaseRepository<ClientDevice>(context), IClientDeviceRepository
     {
-        public async Task<ClientDevice?> FindByName(string deviceName)
+        public async Task<ClientDevice?> FindByNameAsNoTrackingAsync(string deviceName)
         {
             return await context.ClientDevices
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cd => cd.Name == deviceName);
         }
-
+        
         public async Task<PagedResult<ClientDeviceResponseDTO>> GetPagedAsync(int pageNumber, int pageSize)
         {
             return await context.ClientDevices
@@ -25,6 +26,24 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                     cd.Name,
                     cd.ConnectedAt))
                 .ToPagedResultAsync(pageNumber, pageSize);
+        }
+
+        public override Task AddRangeAsync(IEnumerable<ClientDevice> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(ClientDevice value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Remove(ClientDevice value) => context.ClientDevices.Remove(value);
+
+        public async Task<ClientDevice?> FindByConnectionIdAsync(string connectionId)
+        {
+            return await context.ClientDevices
+                .FirstOrDefaultAsync(cd => cd.ConnectionId == connectionId);
         }
     }
 }
