@@ -3,7 +3,7 @@ using Quartz;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.BackgroundJobs
 {
-    internal class SyncEnrolledStudentsBackgroundJob(IStudentClientApiService studentClientApiService)
+    internal class SyncEnrolledStudentsBackgroundJob(IStudentService studentClientApiService)
         : IJob
     {
         public async Task Execute(IJobExecutionContext context)

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260307144345_ClientDevice")]
-    partial class ClientDevice
+    [Migration("20260313113202_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -366,6 +366,96 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.ToTable("session_histories", (string)null);
                 });
 
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Student", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("BirthDate")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("birth_date");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
+                        .HasColumnName("contact_number");
+
+                    b.Property<string>("CourseCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("course_code");
+
+                    b.Property<string>("EnrollmentStatus")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("enrollment_status");
+
+                    b.Property<string>("EnrollmentUID")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("enrollment_uid");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("gender");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("last_name");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("middle_name");
+
+                    b.Property<string>("NameSuffix")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("name_suffix");
+
+                    b.Property<string>("SchoolYear")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("school_year");
+
+                    b.Property<string>("Semester")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("semester");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("students", (string)null);
+                });
+
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -448,6 +538,17 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Student", b =>
+                {
+                    b.HasOne("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates.User", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Student", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.UserRole", b =>
                 {
                     b.HasOne("NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities.Role", "Role")
@@ -479,6 +580,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     b.Navigation("AnswerEvaluations");
 
                     b.Navigation("Evaluations");
+
+                    b.Navigation("Student");
 
                     b.Navigation("UserRoles");
                 });

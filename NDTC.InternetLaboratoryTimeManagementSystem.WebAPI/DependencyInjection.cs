@@ -25,6 +25,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI
 
                 // add custom Date and Time format
                 options.SerializerOptions.Converters.Add(new CustomDateTimeJsonConverter("yyyy-MM-dd HH:mm:ss"));
+
+                options.SerializerOptions.PropertyNameCaseInsensitive = true;
             });
 
             services.AddRealtimeServices();

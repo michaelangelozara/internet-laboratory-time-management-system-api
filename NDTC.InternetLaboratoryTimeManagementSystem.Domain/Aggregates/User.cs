@@ -15,6 +15,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
         public Account? Account { get; private set; }
 
+        public Student? Student { get; private set; }
+
         public ICollection<UserRole> UserRoles { get; } = [];
 
         public ICollection<Evaluation> Evaluations { get; } = [];
@@ -33,6 +35,13 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
             };
 
             return user;
+        }
+
+        public void SetStudent(Student student)
+        {
+            ArgumentNullException.ThrowIfNull(student);
+
+            Student = student;
         }
     }
 }

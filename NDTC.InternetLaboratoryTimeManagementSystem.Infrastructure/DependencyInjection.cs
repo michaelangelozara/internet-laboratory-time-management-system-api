@@ -12,6 +12,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.ClientDevices;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Evaluations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Roles;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.SyncRequests;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Authentication;
@@ -25,6 +26,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Options;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Realtime.Configurations;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services;
+using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.ThirdPartyApi;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Time;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 using Quartz;
@@ -45,7 +47,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
                 .AddOptions(configuration)
                 .AddRepositories()
                 .AddBackgroundJobs()
-                .AddSignalRWithConfiguration();
+                .AddSignalRWithConfiguration()
+                .AddHttpTypedClient(configuration);
 
         private static IServiceCollection AddServices(this IServiceCollection services)
         {
@@ -58,7 +61,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IClientDeviceService, ClientDeviceService>();
 
             // thirt party api
-            services.AddScoped<IStudentClientApiService, StudentClientApiService>();
+            services.AddScoped<IStudentService, StudentService>();
 
 
             return services;
@@ -75,6 +78,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
             services.AddScoped<IAnswerEvaluationRepository, AnswerEvaluationRepository>();
             services.AddScoped<ISyncRequestRepository, SyncRequestRepository>();
             services.AddScoped<IClientDeviceRepository, ClientDeviceRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -203,6 +207,29 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure
 
             // add signalr configuration
             services.AddSingleton<IPostConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddHttpTypedClient(this IServiceCollection services, IConfiguration configuration)
+        {
+            string userAgent = configuration["NDTC:UserAgent"] ?? throw new InvalidOperationException("UserAgent is not configured.");
+            string baseUrl = configuration["NDTC:BaseUrl"] ?? throw new InvalidOperationException("BaseUrl is not configured.");
+
+            services.AddHttpClient<StudentServiceClientApi>((serviceProvider, httpClient) =>
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
+                httpClient.BaseAddress = new Uri(baseUrl);
+            })
+            // This allows to use the StudentServiceClientApi (Transient) to Singleton service
+            .ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                return new SocketsHttpHandler
+                {
+                    PooledConnectionLifetime = TimeSpan.FromMinutes(5)
+                };
+            })
+            .SetHandlerLifetime(Timeout.InfiniteTimeSpan);
 
             return services;
         }

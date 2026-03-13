@@ -12,6 +12,20 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "client_devices",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
+                    connection_id = table.Column<string>(type: "character varying(60)", maxLength: 60, nullable: false),
+                    connected_at = table.Column<DateTime>(type: "timestamptz", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_client_devices", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "roles",
                 columns: table => new
                 {
@@ -132,6 +146,36 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 });
 
             migrationBuilder.CreateTable(
+                name: "students",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    first_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    middle_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    last_name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    name_suffix = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    birth_date = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    gender = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    contact_number = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    enrollment_uid = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    course_code = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    school_year = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    semester = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    enrollment_status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_students", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_students_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "user_roles",
                 columns: table => new
                 {
@@ -237,6 +281,18 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_client_devices_connection_id",
+                table: "client_devices",
+                column: "connection_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_client_devices_name",
+                table: "client_devices",
+                column: "name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_evaluations_created_at",
                 table: "evaluations",
                 column: "created_at");
@@ -260,6 +316,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 name: "IX_session_histories_account_id",
                 table: "session_histories",
                 column: "account_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_students_user_id",
+                table: "students",
+                column: "user_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_sync_locks_name",
@@ -307,10 +369,16 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 name: "answer_evaluations");
 
             migrationBuilder.DropTable(
+                name: "client_devices");
+
+            migrationBuilder.DropTable(
                 name: "role_claims");
 
             migrationBuilder.DropTable(
                 name: "session_histories");
+
+            migrationBuilder.DropTable(
+                name: "students");
 
             migrationBuilder.DropTable(
                 name: "sync_locks");

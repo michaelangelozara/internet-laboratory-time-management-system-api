@@ -9,6 +9,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data
     {
         public DbSet<User> Users { get; private set; }
 
+        public DbSet<Student> Students { get; private set; }
+
         public DbSet<UserRole> UserRoles { get; private set; }
 
         public DbSet<Account> Accounts { get; private set; }
