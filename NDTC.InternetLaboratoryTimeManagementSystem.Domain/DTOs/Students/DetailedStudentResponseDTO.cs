@@ -1,6 +1,6 @@
 ﻿namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students
 {
-    public sealed record StudentResponseDTO
+    public sealed record DetailedStudentResponseDTO
     {
         public string Student_UID { get; private init; }
 

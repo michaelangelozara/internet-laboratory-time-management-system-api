@@ -59,7 +59,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             }
         }
 
-        private static List<User> GetUsers(IEnumerable<StudentResponseDTO> enrolledStudents, int i, int batchSize)
+        private static List<User> GetUsers(IEnumerable<DetailedStudentResponseDTO> enrolledStudents, int i, int batchSize)
         {
             // convert to users
             return [.. enrolledStudents.Select(es =>

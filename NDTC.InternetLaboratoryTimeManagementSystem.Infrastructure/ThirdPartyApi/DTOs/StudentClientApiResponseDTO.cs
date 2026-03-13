@@ -10,6 +10,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.ThirdPartyA
 
         public int Total { get; private init; }
 
-        public IEnumerable<StudentResponseDTO> Data { get; private set; }
+        public IEnumerable<DetailedStudentResponseDTO> Data { get; private set; }
     }
 }
