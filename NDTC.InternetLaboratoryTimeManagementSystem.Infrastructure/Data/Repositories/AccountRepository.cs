@@ -134,20 +134,58 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .AnyAsync(a => a.UserId == userId);
         }
 
-        public async Task<PagedResult<SessionHistoryResponseDTO>> GetPagedAsync(int pageNumber, int pageSize)
+        public async Task<PagedResult<SessionHistoryResponseDTO>> GetPagedAsync(int pageNumber, int pageSize, string? query)
         {
-            return await context.SessionHistories
-                .GroupBy(sh => new { sh.AccountId, sh.Account.User.SchoolId })
-                .Select(group => new
-                {
-                    group.Key.SchoolId,
-                    ConsumedTime = group.Sum(x => x.ConsumedTime)
-                })
-                .OrderBy(x => x.SchoolId)
-                .Select(x => new SessionHistoryResponseDTO(
-                    x.SchoolId,
-                    x.ConsumedTime))
-                .ToPagedResultAsync(pageNumber, pageSize);
+            var sessionHistories = context.SessionHistories
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                string q = query.Trim();
+
+                return await context.SessionHistories
+                    .GroupBy(sh => new { sh.AccountId, sh.Account.User.SchoolId, sh.Account.User.Student.FirstName, sh.Account.User.Student.MiddleName, sh.Account.User.Student.LastName })
+                    .Where(group => 
+                        EF.Functions.ILike(group.Key.FirstName, $"{q}%") ||
+                        EF.Functions.ILike(group.Key.LastName, $"{q}%"))
+                    .Select(group => new
+                    {
+                        group.Key.SchoolId,
+                        ConsumedTime = group.Sum(x => x.ConsumedTime),
+                        group.Key.FirstName,
+                        group.Key.MiddleName,
+                        group.Key.LastName,
+                    })
+                    .OrderBy(x => x.SchoolId)
+                    .Select(x => new SessionHistoryResponseDTO(
+                        x.SchoolId,
+                        x.FirstName,
+                        x.MiddleName,
+                        x.LastName,
+                        x.ConsumedTime))
+                    .ToPagedResultAsync(pageNumber, pageSize);
+            }
+            else
+            {
+                return await context.SessionHistories
+                    .GroupBy(sh => new { sh.AccountId, sh.Account.User.SchoolId, sh.Account.User.Student.FirstName, sh.Account.User.Student.MiddleName, sh.Account.User.Student.LastName })
+                    .Select(group => new
+                    {
+                        group.Key.SchoolId,
+                        ConsumedTime = group.Sum(x => x.ConsumedTime),
+                        group.Key.FirstName,
+                        group.Key.MiddleName,
+                        group.Key.LastName,
+                    })
+                    .OrderBy(x => x.SchoolId)
+                    .Select(x => new SessionHistoryResponseDTO(
+                        x.SchoolId,
+                        x.FirstName,
+                        x.MiddleName,
+                        x.LastName,
+                        x.ConsumedTime))
+                    .ToPagedResultAsync(pageNumber, pageSize);
+            }
         }
 
         public async Task BulkMergeAsync(IEnumerable<Account> accounts)

@@ -10,7 +10,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queri
     {
         public async Task<Result<PagedResult<SessionHistoryResponseDTO>>> Handle(GetPagedSessionHistoryQuery request, CancellationToken cancellationToken)
         {
-            return Result.Success(await accountRepository.GetPagedAsync(request.PageNumber, request.PageSize));
+            return Result.Success(await accountRepository.GetPagedAsync(request.PageNumber, request.PageSize, request.Query));
         }
     }
 }
