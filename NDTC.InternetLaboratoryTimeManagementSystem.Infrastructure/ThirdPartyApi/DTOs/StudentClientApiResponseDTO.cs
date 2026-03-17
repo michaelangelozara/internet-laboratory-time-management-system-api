@@ -4,12 +4,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.ThirdPartyA
 {
     public sealed record StudentClientApiResponseDTO
     {
-        public bool Success { get; private init; }
+        public bool Success { get; init; }
 
-        public string SchoolYear { get; private init; }
+        public string SchoolYear { get; init; }
 
-        public int Total { get; private init; }
+        public int Total { get; init; }
 
-        public IEnumerable<DetailedStudentResponseDTO> Data { get; private set; }
+        public IEnumerable<DetailedStudentResponseDTO> Data { get; set; }
     }
 }

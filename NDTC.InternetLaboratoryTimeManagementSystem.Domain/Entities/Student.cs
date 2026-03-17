@@ -25,9 +25,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public string SchoolYear { get; private set; } = string.Empty;
 
-        public string Semester { get; private set; } = string.Empty;
+        public string? Semester { get; private set; } = string.Empty;
 
-        public string EnrollmentStatus { get; private set; } = string.Empty;
+        public string? EnrollmentStatus { get; private set; } = string.Empty;
+
+        // this serves as unique identifier that can be used in bulk upsert
+        public string SchoolId { get; private set; } = string.Empty;
 
         public Guid UserId { get; private set; }
 
@@ -45,7 +48,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             string courseCode,
             string schoolYear,
             string semester,
-            string enrollmentStatus)
+            string enrollmentStatus,
+            string schoolId,
+            Guid userId)
         {
             var student = new Student
             {
@@ -61,7 +66,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
                 CourseCode = courseCode,
                 SchoolYear = schoolYear,
                 Semester = semester,
-                EnrollmentStatus = enrollmentStatus
+                EnrollmentStatus = enrollmentStatus,
+                SchoolId = schoolId,
+                UserId = userId
             };
 
             return student;

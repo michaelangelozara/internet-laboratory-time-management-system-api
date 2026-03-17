@@ -12,6 +12,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
         public async Task<SyncRequest> GetAsync(string name)
         {
             return await context.SyncRequests
+                .AsNoTracking()
                 .SingleAsync(sr => sr.Name == name);
         }
 

@@ -66,15 +66,22 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(s => s.Semester)
                 .HasColumnName("semester")
                 .HasMaxLength(20)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(s => s.EnrollmentStatus)
                 .HasColumnName("enrollment_status")
+                .HasMaxLength(50)
+                .IsRequired(false);
+
+            builder.Property(s => s.SchoolId)
+                .HasColumnName("school_id")
                 .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(s => s.UserId)
                 .HasColumnName("user_id");
+
+            builder.HasIndex(s => s.SchoolId).IsUnique();
 
             builder.HasOne(s => s.User)
                 .WithOne(u => u.Student)

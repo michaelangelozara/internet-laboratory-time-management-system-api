@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
@@ -147,6 +148,14 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                     x.SchoolId,
                     x.ConsumedTime))
                 .ToPagedResultAsync(pageNumber, pageSize);
+        }
+
+        public async Task BulkMergeAsync(IEnumerable<Account> accounts)
+        {
+            await context.BulkInsertOrUpdateAsync(accounts, options =>
+            {
+                options.UpdateByProperties = [nameof(Account.RFID)];
+            });
         }
     }
 }

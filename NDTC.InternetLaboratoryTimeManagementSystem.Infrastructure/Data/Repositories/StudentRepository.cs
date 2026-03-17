@@ -1,6 +1,6 @@
 ﻿using EFCore.BulkExtensions;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Extensions;
 using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
@@ -10,11 +10,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
     internal class StudentRepository(AppDbContext context)
         : IStudentRepository
     {
-        public async Task BulkMergeAsync(IEnumerable<User> users)
+        public async Task BulkMergeAsync(IEnumerable<Student> students)
         {
-            await context.BulkInsertOrUpdateAsync(users, options =>
+            await context.BulkInsertOrUpdateAsync(students, options =>
             {
-                options.UpdateByProperties = ["school_id"];
+                options.UpdateByProperties = [nameof(Student.SchoolId)];
             });
         }
 

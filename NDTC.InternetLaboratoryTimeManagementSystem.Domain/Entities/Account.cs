@@ -31,14 +31,15 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         protected Account() { }
 
-        public static Account Create(string rfid)
+        public static Account Create(string rfid, Guid userId)
         {
             var account = new Account
             {
                 Id = Guid.NewGuid(),
                 RFID = rfid,
                 AvailableDuration = Duration.DefaultAccountDuration,
-                LastLoginAt = DateTime.UtcNow
+                LastLoginAt = DateTime.UtcNow,
+                UserId = userId
             };
 
             return account;

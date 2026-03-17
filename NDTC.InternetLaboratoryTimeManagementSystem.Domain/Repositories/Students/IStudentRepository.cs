@@ -1,10 +1,10 @@
-﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
+﻿using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students
 {
     public interface IStudentRepository : IPagedRepository<BasicStudentResponseDTO>
     {
-        Task BulkMergeAsync(IEnumerable<User> users);
+        Task BulkMergeAsync(IEnumerable<Student> students);
     }
 }

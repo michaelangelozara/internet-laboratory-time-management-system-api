@@ -15,8 +15,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.ThirdPartyA
 
             try
             {
-                return await httpClient
-                .GetFromJsonAsync<StudentClientApiResponseDTO>($"/ndtc-rfid-api/public/api/students?api_key={apiKey}");
+                return await httpClient.GetFromJsonAsync<StudentClientApiResponseDTO>($"/ndtc-rfid-api/public/api/students?api_key={apiKey}");
             }
             catch (Exception)
             {

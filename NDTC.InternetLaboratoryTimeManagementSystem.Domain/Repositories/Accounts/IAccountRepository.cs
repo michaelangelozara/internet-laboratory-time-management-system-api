@@ -23,5 +23,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accoun
         Task<bool> IsSignedInByUserIdAsync(Guid userId);
 
         Task<bool> DoesExistByUserIdAsync(Guid userId);
+
+        Task BulkMergeAsync(IEnumerable<Account> accounts);
     }
 }

@@ -27,11 +27,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
         public static User Create(string schoolId, string rfid)
         {
+            Guid id = Guid.NewGuid();
             var user = new User
             {
-                Id = Guid.NewGuid(),
+                Id = id,
                 SchoolId = schoolId,
-                Account = Account.Create(rfid)
+                Account = Account.Create(rfid, id)
             };
 
             return user;

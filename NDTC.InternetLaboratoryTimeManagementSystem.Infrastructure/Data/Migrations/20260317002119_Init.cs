@@ -160,8 +160,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                     enrollment_uid = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     course_code = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     school_year = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    semester = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
-                    enrollment_status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    semester = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    enrollment_status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    school_id = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -316,6 +317,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 name: "IX_session_histories_account_id",
                 table: "session_histories",
                 column: "account_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_students_school_id",
+                table: "students",
+                column: "school_id",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_students_user_id",

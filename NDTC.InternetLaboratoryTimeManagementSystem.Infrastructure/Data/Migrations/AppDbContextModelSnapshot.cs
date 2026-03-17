@@ -17,7 +17,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.0")
+                .HasAnnotation("ProductVersion", "10.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -388,7 +388,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnName("course_code");
 
                     b.Property<string>("EnrollmentStatus")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("enrollment_status");
@@ -429,6 +428,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnType("character varying(10)")
                         .HasColumnName("name_suffix");
 
+                    b.Property<string>("SchoolId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("school_id");
+
                     b.Property<string>("SchoolYear")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -436,7 +441,6 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnName("school_year");
 
                     b.Property<string>("Semester")
-                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
                         .HasColumnName("semester");
@@ -446,6 +450,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SchoolId")
+                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
