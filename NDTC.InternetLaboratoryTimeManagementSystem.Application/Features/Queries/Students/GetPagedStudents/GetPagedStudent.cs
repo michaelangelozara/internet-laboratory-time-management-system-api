@@ -4,6 +4,6 @@ using NDTC.InternetLaboratoryTimeManagementSystem.SharedKernel;
 
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Application.Features.Queries.Students.GetPagedStudents
 {
-    public sealed record GetPagedStudent(int PageNumber, int PageSize) 
+    public sealed record GetPagedStudent(int PageNumber, int PageSize, string? Query) 
         : IRequest<Result<PagedResult<BasicStudentResponseDTO>>>;
 }

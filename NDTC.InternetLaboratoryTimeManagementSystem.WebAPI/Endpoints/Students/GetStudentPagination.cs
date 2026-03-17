@@ -15,9 +15,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.WebAPI.Endpoints.Students
             app.MapGet("/users/students", async (
                 ISender sender,
                 int page_number = 1,
-                int page_size = 10) =>
+                int page_size = 10,
+                string? search_query = default) =>
             {
-                var query = new GetPagedStudent(page_number, page_size);
+                var query = new GetPagedStudent(page_number, page_size, search_query);
                 var result = await sender.Send(query);
 
                 return result.Match(Results.Ok, CustomResults.Problem);

@@ -1,4 +1,5 @@
 ﻿using EFCore.BulkExtensions;
+using Microsoft.EntityFrameworkCore;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students;
@@ -18,12 +19,23 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
             });
         }
 
-        public async Task<PagedResult<BasicStudentResponseDTO>> GetPagedAsync(int pageNumber, int pageSize)
+        public async Task<PagedResult<BasicStudentResponseDTO>> GetPagedAsync(int pageNumber, int pageSize, string? query)
         {
-            return await context.Students
+            var students = context.Students
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                string q = query.Trim();
+                students = students.Where(s => 
+                    EF.Functions.ILike(s.FirstName, $"{q}%") ||
+                    EF.Functions.ILike(s.LastName, $"{q}%"));
+            }
+
+            return await students
                 .Select(s => new BasicStudentResponseDTO(
                     s.Id,
-                    s.User.SchoolId,
+                    s.SchoolId,
                     s.FirstName,
                     s.MiddleName,
                     s.LastName,

@@ -8,7 +8,7 @@
             string LastName,
             string CourseCode,
             string SchoolYear,
-            string EnrollmentStatus)
+            string? EnrollmentStatus)
     {
         public Guid Id { get; } = Id;
 
@@ -22,6 +22,6 @@
 
         public string SchoolYear { get; } = SchoolYear;
 
-        public string EnrollmentStatus { get; } = EnrollmentStatus;
+        public string? EnrollmentStatus { get; } = EnrollmentStatus;
     }
 }
