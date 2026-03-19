@@ -45,7 +45,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
 
             builder.Property(s => s.ContactNumber)
                 .HasColumnName("contact_number")
-                .HasMaxLength(12)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(s => s.EnrollmentUID)

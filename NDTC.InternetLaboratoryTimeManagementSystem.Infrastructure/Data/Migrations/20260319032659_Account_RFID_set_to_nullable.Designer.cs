@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260319032659_Account_RFID_set_to_nullable")]
+    partial class Account_RFID_set_to_nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,8 +379,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("contact_number");
 
                     b.Property<string>("CourseCode")

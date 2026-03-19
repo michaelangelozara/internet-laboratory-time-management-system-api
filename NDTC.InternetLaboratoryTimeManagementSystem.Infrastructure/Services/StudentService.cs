@@ -6,6 +6,7 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Enums.SyncRequests;
+using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
@@ -23,7 +24,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
         StudentServiceClientApi studentServiceClientApi,
         IStudentRepository studentRepository,
         IUserRepository userRepository,
-        IAccountRepository accountRepository
+        IAccountRepository accountRepository,
+        IUnitOfWork unitOfWork
         )
         : IStudentService
     {

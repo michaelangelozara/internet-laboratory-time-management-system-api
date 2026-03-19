@@ -8,7 +8,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 {
     public sealed class Account : Entity
     {
-        public string RFID { get; private set; } = string.Empty;
+        public string? RFID { get; private set; }
 
         public DateTime LastLoginAt { get; private set; }
 
@@ -31,7 +31,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         protected Account() { }
 
-        public static Account Create(string rfid, Guid userId)
+        public static Account Create(string? rfid, Guid userId)
         {
             var account = new Account
             {
