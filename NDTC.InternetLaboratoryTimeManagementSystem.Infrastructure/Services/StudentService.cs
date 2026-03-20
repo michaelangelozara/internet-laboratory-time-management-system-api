@@ -24,9 +24,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
         StudentServiceClientApi studentServiceClientApi,
         IStudentRepository studentRepository,
         IUserRepository userRepository,
-        IAccountRepository accountRepository,
-        IUnitOfWork unitOfWork
-        )
+        IAccountRepository accountRepository)
         : IStudentService
     {
         public async Task TryToSyncEnrolledStudents()
