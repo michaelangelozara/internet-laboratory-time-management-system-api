@@ -176,7 +176,10 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
             var currentSemester = GetCurrentSemester();
 
             var currentEnrolledStudents = studentClientApiResponseDTO.Data
-                .Where(dsrDTO => dsrDTO.SchoolYear == currentShoolYear && dsrDTO.Semester == currentSemester)
+                .Where(dsrDTO => 
+                    dsrDTO.SchoolYear == currentShoolYear && 
+                    dsrDTO.Semester == currentSemester && 
+                    dsrDTO.RFIDNumber is not null)
                 .ToList();
 
             int total = currentEnrolledStudents.Count;

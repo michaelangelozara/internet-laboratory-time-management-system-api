@@ -16,7 +16,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(a => a.RFID)
                 .HasColumnName("rfid")
                 .HasMaxLength(100)
-                .IsRequired(false);
+                .IsRequired();
 
             builder.Property(a => a.UserId)
                 .HasColumnName("user_id");
