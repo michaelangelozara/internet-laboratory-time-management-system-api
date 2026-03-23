@@ -88,7 +88,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
                 .FirstOrDefaultAsync();
 
             if (!evalutionId.HasValue)
-                return true;
+                return false;
 
             return await context.Evaluations
                 .AnyAsync(e => 
