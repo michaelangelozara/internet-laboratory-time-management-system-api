@@ -16,6 +16,11 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(a => a.RFID)
                 .HasColumnName("rfid")
                 .HasMaxLength(100)
+                .IsRequired(false);
+
+            builder.Property(a => a.SchoolId)
+                .HasColumnName("school_id")
+                .HasMaxLength(100)
                 .IsRequired();
 
             builder.Property(a => a.UserId)
@@ -36,6 +41,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
                 .HasDefaultValue(false);
 
             builder.HasIndex(a => a.RFID)
+                .IsUnique();
+
+            builder.HasIndex(a => a.SchoolId)
                 .IsUnique();
 
             builder.HasOne(a => a.User)

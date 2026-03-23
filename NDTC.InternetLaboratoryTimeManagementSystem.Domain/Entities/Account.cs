@@ -12,6 +12,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         public DateTime LastLoginAt { get; private set; }
 
+        public string SchoolId { get; private set; }
+
         [NotMapped]
         public TimeSpan RemainingDurationTimeSpan => (new TimeSpan(AvailableDuration) - (DateTime.UtcNow - LastLoginAt));
 
@@ -31,7 +33,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
 
         protected Account() { }
 
-        public static Account Create(string? rfid, Guid userId)
+        public static Account Create(string? rfid, Guid userId, string schoolId)
         {
             var account = new Account
             {
@@ -39,6 +41,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
                 RFID = rfid,
                 AvailableDuration = Duration.DefaultAccountDuration,
                 LastLoginAt = DateTime.UtcNow,
+                SchoolId = schoolId,
                 UserId = userId
             };
 

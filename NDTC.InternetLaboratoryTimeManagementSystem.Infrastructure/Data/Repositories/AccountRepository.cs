@@ -192,7 +192,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Reposi
         {
             await context.BulkInsertOrUpdateAsync(accounts, options =>
             {
-                options.UpdateByProperties = [nameof(Account.RFID)];
+                options.UpdateByProperties = [nameof(Account.SchoolId)];
             });
         }
     }

@@ -32,7 +32,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
             {
                 Id = id,
                 SchoolId = schoolId,
-                Account = Account.Create(rfid, id)
+                Account = Account.Create(rfid, id, schoolId)
             };
 
             return user;
