@@ -18,7 +18,7 @@
 
         public string ContactNumber { get; init; }
 
-        public string RFIDNumber { get; init; }
+        public string? RFIDNumber { get; init; }
 
         public string Enrollment_UID { get; init; }
 

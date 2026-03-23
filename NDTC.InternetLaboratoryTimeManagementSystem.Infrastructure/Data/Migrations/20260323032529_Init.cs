@@ -106,8 +106,9 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    rfid = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    rfid = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
                     last_login_at = table.Column<DateTime>(type: "timestamptz", nullable: false),
+                    school_id = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     available_duration = table.Column<long>(type: "bigint", nullable: false),
                     is_logged_in = table.Column<bool>(type: "boolean", nullable: false, defaultValue: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
@@ -253,6 +254,12 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Migrat
                 name: "IX_accounts_rfid",
                 table: "accounts",
                 column: "rfid",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_accounts_school_id",
+                table: "accounts",
+                column: "school_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -20,7 +20,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
 
             builder.Property(a => a.SchoolId)
                 .HasColumnName("school_id")
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsRequired();
 
             builder.Property(a => a.UserId)

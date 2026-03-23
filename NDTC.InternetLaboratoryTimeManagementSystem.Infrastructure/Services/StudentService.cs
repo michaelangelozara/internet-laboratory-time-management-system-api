@@ -6,7 +6,6 @@ using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.DTOs.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Enums.SyncRequests;
-using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Accounts;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Students;
 using NDTC.InternetLaboratoryTimeManagementSystem.Domain.Repositories.Users;
@@ -177,9 +176,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Services
 
             var currentEnrolledStudents = studentClientApiResponseDTO.Data
                 .Where(dsrDTO => 
-                    dsrDTO.SchoolYear == currentShoolYear && 
-                    dsrDTO.Semester == currentSemester && 
-                    dsrDTO.RFIDNumber is not null)
+                    dsrDTO.SchoolYear == currentShoolYear &&
+                    dsrDTO.Semester == currentSemester)
                 .ToList();
 
             int total = currentEnrolledStudents.Count;

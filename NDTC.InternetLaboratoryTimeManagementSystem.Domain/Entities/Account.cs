@@ -38,7 +38,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Entities
             var account = new Account
             {
                 Id = Guid.NewGuid(),
-                RFID = rfid,
+                RFID = string.IsNullOrWhiteSpace(rfid) ? null : rfid,
                 AvailableDuration = Duration.DefaultAccountDuration,
                 LastLoginAt = DateTime.UtcNow,
                 SchoolId = schoolId,

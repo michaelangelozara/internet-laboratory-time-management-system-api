@@ -25,7 +25,7 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Domain.Aggregates
 
         protected User() { }
 
-        public static User Create(string schoolId, string rfid)
+        public static User Create(string schoolId, string? rfid)
         {
             Guid id = Guid.NewGuid();
             var user = new User

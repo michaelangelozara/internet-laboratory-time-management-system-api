@@ -81,7 +81,8 @@ namespace NDTC.InternetLaboratoryTimeManagementSystem.Infrastructure.Data.Config
             builder.Property(s => s.UserId)
                 .HasColumnName("user_id");
 
-            builder.HasIndex(s => s.SchoolId).IsUnique();
+            builder.HasIndex(s => s.SchoolId)
+                .IsUnique();
 
             builder.HasOne(s => s.User)
                 .WithOne(u => u.Student)
